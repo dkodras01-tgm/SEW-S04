@@ -1,22 +1,25 @@
 package kodrasritter.message;
 
-public class ChatMessage implements Message {
-	
-	
-	private String content;
+public class ChatMessage extends Message {
 	
 	
 	@Override
 	public String getContent() {
-		return content;
+		return super.getContent();
 		
 	}
 
 	@Override
 	public void setContent(String content) {
-		this.content = content;
+		super.setContent(content);
 		
 	}
+
+	@Override
+	public void process() {
+		
+	}
+
 
 
 }

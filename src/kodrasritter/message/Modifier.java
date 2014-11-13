@@ -1,23 +1,33 @@
 package kodrasritter.message;
 
-public abstract class Modifier implements Message {
+public abstract class Modifier extends Message {
 
-	private String content;
+	private Message m;
+	
+	public Modifier(Message m) {
+		this.m = m;
+	}
 	
 	@Override
 	public String getContent() {
-		return content;
+		return super.getContent();
 		
 	}
 
 	@Override
 	public void setContent(String content) {
-		this.content = content;
+		super.setContent(content);
 		
 	}
 	
-	public abstract void process();
+
+	public Message getMessage() {
+		return this.m;
 	
+	}
+
+	
+	public abstract void process();
 	
 
 }
