@@ -16,8 +16,8 @@ public class ChatMessage extends Message {
 	}
 
 	@Override
-	public void process() {
-		
+	public String process() {
+		return super.getContent();
 	}
 
 

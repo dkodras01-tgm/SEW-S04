@@ -12,6 +12,6 @@ public abstract class Message {
 		this.content = content;
 	}
 	
-	public abstract void process();
+	public abstract String process();
 
 }

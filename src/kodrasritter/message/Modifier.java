@@ -2,11 +2,8 @@ package kodrasritter.message;
 
 public abstract class Modifier extends Message {
 
-	private Message m;
 	
-	public Modifier(Message m) {
-		this.m = m;
-	}
+
 	
 	@Override
 	public String getContent() {
@@ -20,14 +17,7 @@ public abstract class Modifier extends Message {
 		
 	}
 	
-
-	public Message getMessage() {
-		return this.m;
-	
-	}
-
-	
-	public abstract void process();
+	public abstract String process();
 	
 
 }

@@ -11,10 +11,9 @@ public class Test {
 		cm = new DoubleCharacter(cm);
 		cm = new DoubleCharacter(cm);
 		cm = new UpperCase(cm);
-		cm = new DoubleCharacter(cm);
 		
 		
-		cm.process();
+		cm.setContent(cm.process());
 		
 		System.out.println(cm.getContent());
 		
