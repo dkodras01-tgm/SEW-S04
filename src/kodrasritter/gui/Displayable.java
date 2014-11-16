@@ -2,8 +2,8 @@ package kodrasritter.gui;
 
 public interface Displayable {
 
-	void updateOutput(String content);
-	void updateInput(String content);
-	String getInput();
+	void updateInputDisplay(String content);
+	void updateUserInput(String content);
+	String getUserInput();
 
 }

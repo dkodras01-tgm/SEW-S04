@@ -1,28 +1,25 @@
 package kodrasritter.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.TextArea;
+import java.awt.TextField;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
-import javax.swing.JButton;
-
-import java.awt.GridLayout;
-
 import javax.swing.JTextField;
-
-import java.awt.TextField;
-import java.awt.TextArea;
-import java.awt.event.ActionListener;
+import javax.swing.border.EmptyBorder;
 
 public class ChatWindow extends JFrame {
 
 	private JPanel contentPane;
-	private TextArea textArea;
-	private TextField textField;
+	private JTextArea textArea;
+	private JTextField textField;
+	private JButton btnSenden;
 	
 //	/**
 //	 * Launch the application.
@@ -73,14 +70,14 @@ public class ChatWindow extends JFrame {
 		JCheckBox chckbxCensor = new JCheckBox("Censor");
 		panel_2.add(chckbxCensor);
 		
-		JCheckBox chckbxDubbleletter = new JCheckBox("DubbleLetter");
-		panel_2.add(chckbxDubbleletter);
+		JCheckBox chckbxDoubleletter = new JCheckBox("DoubleLetter");
+		panel_2.add(chckbxDoubleletter);
 		
-		textField = new TextField();
+		textField = new JTextField();
 		textField.addActionListener(al);
 		panel_1.add(textField);
 		
-		textArea = new TextArea();
+		textArea = new JTextArea();
 		textArea.setEditable(false);
 		contentPane.add(textArea, BorderLayout.CENTER);
 		
@@ -100,6 +97,14 @@ public class ChatWindow extends JFrame {
 	
 	public void setText(String content) {
 		textField.setText(content);
+	}
+	
+	public JTextField getTextField() {
+		return this.textField;
+	}
+	
+	public JButton getBtnSenden() {
+		return this.btnSenden;
 	}
 
 }

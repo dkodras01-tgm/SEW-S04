@@ -2,10 +2,13 @@ package kodrasritter.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import kodrasritter.Controller;
 
-public class ChatActionListener implements ActionListener {
+
+public class ChatActionListener implements ActionListener, WindowListener {
 	
 	Controller control;
 	
@@ -16,7 +19,49 @@ public class ChatActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		control.send();
+		if (control.messageSent(e))
+			control.send();
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		control.closeConnection();
+		
+	}
+	
+	@Override
+	public void windowOpened(WindowEvent e) {
+		
+	}
+
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		
+	}
+
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		
+	}
+
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		
+	}
+
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		
+	}
+
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
 		
 	}
 

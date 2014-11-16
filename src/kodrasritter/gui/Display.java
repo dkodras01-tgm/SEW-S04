@@ -12,16 +12,16 @@ public class Display implements Displayable {
 	}
 	
 	@Override
-	public void updateOutput(String content) {
+	public void updateInputDisplay(String content) {
 		cw.addToTextArea(content);
 		cw.addToTextArea("\n");
 	}
 
-	public void updateInput(String content) {
+	public void updateUserInput(String content) {
 		cw.setText(content);
 	}
 	
-	public String getInput() {
+	public String getUserInput() {
 		return cw.getText();
 	}
 	

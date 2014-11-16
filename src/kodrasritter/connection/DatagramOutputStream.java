@@ -3,6 +3,17 @@ package kodrasritter.connection;
 import java.io.*;
 import java.net.*;
 
+/**
+ * Dieser OutputStream wandelt die Daten eines Streams in ein DatagramPacket um, um dieses dann zu versenden.
+ * 
+ * Diese Klasse wurde mit wenigen Aenderungen von folgender Seite uerbernommen:
+ * http://www.javaworld.com/article/2076519/learn-java/multicast-the-chatwaves.html
+ * [abgerufen am 16.11.2014]
+ * 
+ * @author Mathias Ritter 4AHIT
+ * @version 1.0
+ *
+ */
 public class DatagramOutputStream extends ByteArrayOutputStream {
 	DatagramSocket socket;
 	DatagramPacket packet;

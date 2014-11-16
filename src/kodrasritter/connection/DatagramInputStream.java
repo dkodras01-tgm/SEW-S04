@@ -3,6 +3,17 @@ package kodrasritter.connection;
 import java.io.*;
 import java.net.*;
 
+/**
+ * Dieser InputStream empfaengt die Pakete vom Netzwerk und wandelt diese in einen Stream um.
+ * 
+ * Diese Klasse wurde mit wenigen Aenderungen von folgender Seite uerbernommen:
+ * http://www.javaworld.com/article/2076519/learn-java/multicast-the-chatwaves.html
+ * [abgerufen am 16.11.2014]
+ * 
+ * @author Mathias Ritter 4AHIT
+ * @version 1.0
+ *
+ */
 public class DatagramInputStream extends InputStream {
 	byte[] buffer;
 	int index, count;
