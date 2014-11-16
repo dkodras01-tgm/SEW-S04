@@ -49,7 +49,7 @@ public class DatagramInputStream extends InputStream {
 		return count - index;
 	}
 
-	void receive() throws IOException {
+	private void receive() throws IOException {
 		packet.setLength(buffer.length);
 		socket.receive(packet);
 		index = 0;

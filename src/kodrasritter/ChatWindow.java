@@ -9,37 +9,41 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+
 import java.awt.GridLayout;
+
 import javax.swing.JTextField;
+
 import java.awt.TextField;
 import java.awt.TextArea;
+import java.awt.event.ActionListener;
 
 public class ChatWindow extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChatWindow frame = new ChatWindow();
-					frame.setVisible(true);
-					frame.setTitle("Special Chat");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private TextArea textArea;
+	private TextField textField;
+	
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ChatWindow frame = new ChatWindow();
+//					
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public ChatWindow() {
+	public ChatWindow(ActionListener al) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -52,6 +56,7 @@ public class ChatWindow extends JFrame {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnSenden = new JButton("Senden");
+		btnSenden.addActionListener(al);
 		panel.add(btnSenden, BorderLayout.EAST);
 		
 		JPanel panel_1 = new JPanel();
@@ -71,12 +76,30 @@ public class ChatWindow extends JFrame {
 		JCheckBox chckbxDubbleletter = new JCheckBox("DubbleLetter");
 		panel_2.add(chckbxDubbleletter);
 		
-		TextField textField_1 = new TextField();
-		panel_1.add(textField_1);
+		textField = new TextField();
+		textField.addActionListener(al);
+		panel_1.add(textField);
 		
-		TextArea textArea = new TextArea();
+		textArea = new TextArea();
 		textArea.setEditable(false);
 		contentPane.add(textArea, BorderLayout.CENTER);
+		
+		
+		this.setTitle("Special Chat");
+		this.setVisible(true);
+		
+	}
+	
+	public void addToTextArea(String content) {
+		textArea.append(content);
+	}
+	
+	public String getText() {
+		return textField.getText();
+	}
+	
+	public void setText(String content) {
+		textField.setText(content);
 	}
 
 }
