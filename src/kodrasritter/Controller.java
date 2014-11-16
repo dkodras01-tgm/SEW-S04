@@ -4,6 +4,10 @@ import java.awt.event.ActionListener;
 
 import kodrasritter.connection.NetworkControllable;
 import kodrasritter.connection.Networkcontroller;
+import kodrasritter.gui.ChatActionListener;
+import kodrasritter.gui.ChatWindow;
+import kodrasritter.gui.Display;
+import kodrasritter.gui.Displayable;
 import kodrasritter.message.ChatMessage;
 import kodrasritter.message.Message;
 

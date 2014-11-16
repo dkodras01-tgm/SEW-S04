@@ -1,7 +1,9 @@
-package kodrasritter;
+package kodrasritter.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import kodrasritter.Controller;
 
 public class ChatActionListener implements ActionListener {
 	

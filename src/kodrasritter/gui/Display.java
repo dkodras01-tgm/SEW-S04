@@ -1,4 +1,4 @@
-package kodrasritter;
+package kodrasritter.gui;
 
 import kodrasritter.*;
 

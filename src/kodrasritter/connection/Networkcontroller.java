@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-import kodrasritter.Displayable;
+import kodrasritter.gui.Displayable;
 
 public class Networkcontroller implements NetworkControllable {
 	
