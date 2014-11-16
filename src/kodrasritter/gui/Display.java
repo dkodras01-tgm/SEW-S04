@@ -1,6 +1,9 @@
 package kodrasritter.gui;
 
-import kodrasritter.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import kodrasritter.Controller;
 
 public class Display implements Displayable {
 
@@ -13,7 +16,8 @@ public class Display implements Displayable {
 	
 	@Override
 	public void updateInputDisplay(String content) {
-		cw.addToTextArea(content);
+		String timeStamp = new SimpleDateFormat("[dd.MM.yyyy - HH:mm:ss]").format(Calendar.getInstance().getTime());
+		cw.addToTextArea(timeStamp + " " + content);
 		cw.addToTextArea("\n");
 	}
 

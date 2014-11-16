@@ -38,6 +38,7 @@ public class Networkcontroller implements NetworkControllable {
 			send = new Sender(new OutputStreamWriter(new DatagramOutputStream(socket, group,
 					port), "UTF8"));
 			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
