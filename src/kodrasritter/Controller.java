@@ -2,6 +2,7 @@ package kodrasritter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import kodrasritter.connection.NetworkControllable;
 import kodrasritter.connection.Networkcontroller;
@@ -18,12 +19,13 @@ public class Controller {
 	private Displayable dp;
 	private ChatWindow cw;
 	
+	
 	public Controller() {
 		ActionListener al = new ChatActionListener(this);
 		cw = new ChatWindow(al);
 		dp = new Display(cw);
 		net = new Networkcontroller(dp);
-		initConnection("239.46.194.20", 1234, 10);
+		initConnection("239.46.194.21", 1234, 10);
 	}
 	
 	public boolean messageSent(ActionEvent e) {
@@ -50,7 +52,22 @@ public class Controller {
 	}
 	
 	public static void main(String[] args) {
+		
+//		String file = ClassLoader.getSystemClassLoader().getResource(".").getPath() + "S04.jar";
+//		
+//		if (args.length == 0) {
+//			try {
+//				Runtime.getRuntime().exec(new String[] {"java", "-Djava.net.preferIPv4Stack=true", "-jar", file, "argset"});
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}  
+//		} else {
+//			new Controller();
+//		}
+		
 		new Controller();
+		
 	}
 
 }
