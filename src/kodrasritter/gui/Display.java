@@ -15,7 +15,7 @@ public class Display implements Displayable {
 	}
 	
 	@Override
-	public void updateInputDisplay(String content) {
+	public void updateChatDisplay(String content) {
 		String timeStamp = new SimpleDateFormat("[dd.MM.yyyy - HH:mm:ss]").format(Calendar.getInstance().getTime());
 		cw.addToTextArea(timeStamp + " " + content);
 		cw.addToTextArea("\n");

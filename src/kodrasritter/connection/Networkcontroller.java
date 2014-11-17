@@ -62,7 +62,7 @@ public class Networkcontroller implements NetworkControllable {
 	@Override
 	public void receive(String content) {
 		if (display != null)
-			display.updateInputDisplay(content);
+			display.updateChatDisplay(content);
 	}
 	
 	@Override
