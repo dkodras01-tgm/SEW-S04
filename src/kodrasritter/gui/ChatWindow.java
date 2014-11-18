@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 import kodrasritter.Controller;
 
 @SuppressWarnings("serial")
-public class ChatWindow extends JFrame{
+public class ChatWindow extends JFrame implements Displayable {
 
 	private JPanel contentPane;
 	private JTextArea textArea;
@@ -71,15 +73,15 @@ public class ChatWindow extends JFrame{
 		panel_1.add(panel_2);
 		panel_2.setLayout(new GridLayout(1, 0));
 		
-		JCheckBox chckbxTouppercase = new JCheckBox("ToUpperCase");
+		chckbxTouppercase = new JCheckBox("ToUpperCase");
 		panel_2.add(chckbxTouppercase);
 		//chckbxTouppercase.addItemListener(this);
 		
-		JCheckBox chckbxCensor = new JCheckBox("Censor");
+		chckbxCensor = new JCheckBox("Censor");
 		panel_2.add(chckbxCensor);
 		//chckbxCensor.addItemListener(this);
 		
-		JCheckBox chckbxDoubleletter = new JCheckBox("DoubleLetter");
+		chckbxDoubleletter = new JCheckBox("DoubleLetter");
 		panel_2.add(chckbxDoubleletter);
 		//chckbxDoubleletter.addItemListener(this);
 		
@@ -97,47 +99,40 @@ public class ChatWindow extends JFrame{
 		
 	}
 	
-	public void addToTextArea(String content) {
-		textArea.append(content);
-	}
-	
-	public String getText() {
-		return textField.getText();
-	}
-	
-	public void setText(String content) {
-		textField.setText(content);
-	}
-	
-	public JTextField getTextField() {
-		return this.textField;
-	}
-	
-	public JButton getBtnSenden() {
-		return this.btnSenden;
-	}
-	
-	public boolean isToUpperCase() {
-		if (chckbxTouppercase.isSelected())
-			return true;
-		return false;
+
+	@Override
+	public void updateChatDisplay(String content) {
+		String timeStamp = new SimpleDateFormat("[dd.MM.yyyy - HH:mm:ss]").format(Calendar.getInstance().getTime());
+		this.textArea.append(timeStamp + " " + content);
+		this.textArea.append("\n");
 		
 	}
+
+	@Override
+	public void updateUserInput(String content) {
+		this.textField.setText(content);
+		
+	}
+
+	@Override
+	public String getUserInput() {
+		return this.textField.getText();
+	}
 	
-	public boolean isCensor() {
+	@Override
+	public List<String> getOptions() {
+		LinkedList<String> list = new LinkedList<String>();
+		
+		if (chckbxTouppercase.isSelected())
+			list.add("ToUpperCase");
+		
 		if (chckbxCensor.isSelected())
-			return true;
-		return false;
-	}
-	
-	public boolean isDoubleLetter() {
+			list.add("Censor");
+		
 		if (chckbxDoubleletter.isSelected())
-			return true;
-		return false;
+			list.add("DoubleLetter");
+		
+		return list;
 	}
 	
-	//@Override
-	//public void itemStateChanged(ItemEvent e) {
-	//	
-	//}
 }

@@ -22,9 +22,7 @@ public class ChatActionListener implements
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (control.messageSent(e))
-			control.send();
-		
+		control.send();	
 	}
 
 	@Override

@@ -1,13 +1,12 @@
 package kodrasritter;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import kodrasritter.connection.NetworkControllable;
 import kodrasritter.connection.Networkcontroller;
 import kodrasritter.gui.ChatActionListener;
 import kodrasritter.gui.ChatWindow;
-import kodrasritter.gui.Display;
 import kodrasritter.gui.Displayable;
 import kodrasritter.message.Censorship;
 import kodrasritter.message.ChatMessage;
@@ -18,38 +17,41 @@ import kodrasritter.message.UpperCase;
 public class Controller {
 	
 	private NetworkControllable net;
-	private Displayable dp;
-	private ChatWindow cw;
+	private Displayable display;
 	
 	
 	public Controller() {
+		
 		ActionListener al = new ChatActionListener(this);
-		cw = new ChatWindow(al);
-		dp = new Display(cw);
-		net = new Networkcontroller(dp);
+		
+		display = new ChatWindow(al);
+		net = new Networkcontroller(display);
 		initConnection("239.46.194.21", 1234, 10);
+		
 //		net = new Networkcontroller2(dp);
 //		initConnection("127.0.0.1", 1244, 10);
 		
 	}
 	
-	public boolean messageSent(ActionEvent e) {
-		return (e.getSource() == cw.getBtnSenden() || e.getSource() == cw.getTextField());
-	}
 	
 	public void send() {
 		
 		Message m = new ChatMessage();
-		m.setContent(dp.getUserInput());
-		if(cw.isToUpperCase())
+		m.setContent(display.getUserInput());
+		
+		List<String> options = display.getOptions();
+		
+		if (options.contains("ToUpperCase"))
 			m = new UpperCase(m);
-		if(cw.isDoubleLetter())
+		if (options.contains("DoubleLetter"))
 			m = new DoubleCharacter(m);
-		if(cw.isCensor())
+		if (options.contains("Censor"))
 			m = new Censorship(m);
-		System.out.println(m.getContent());
+		
+		m.setContent(m.process());
+		
 		net.send(m.getContent());
-		dp.updateUserInput("");
+		display.updateUserInput("");
 	}
 	
 	public void closeConnection() {
