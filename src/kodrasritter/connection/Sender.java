@@ -11,15 +11,20 @@ import java.io.OutputStreamWriter;
  */
 public class Sender implements Sendable {
 
+	/** OutputStream zum Senden der Nachrichten */
 	OutputStreamWriter out;
 
 	public Sender(OutputStreamWriter out) {
 		this.out = out;
 	}
 
+	/**
+	 * @see Sendable#send(String)
+	 */
 	@Override
 	public void send(String content) {
 		try {
+			//Die Nachricht wird in einen OutputStream geschrieben
 			out.write(content + "\n");
 			out.flush();
 		} catch (IOException e) {

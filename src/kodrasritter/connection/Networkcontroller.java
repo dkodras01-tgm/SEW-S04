@@ -9,12 +9,28 @@ import java.net.MulticastSocket;
 
 import kodrasritter.gui.Displayable;
 
+/**
+ * Diese Klasse steuert die Verbindungen (Verbindungsaufbau und -Abbau).<br>
+ * Nachrichten werden für das Senden an den Sender weitergegeben.<br>
+ * Empfangene Nachrichten werden an das Display zur Darstellung weitergegeben.<br>
+ * 
+ * @author Mathias Ritter 4AHIT
+ */
 public class Networkcontroller implements NetworkControllable {
 	
+	/** MulticastSocket zum Verbinden zu einer MultiCast-Gruppe */
 	private MulticastSocket socket;
+	
+	/** Sender zum Senden von Nachrichten */
 	private Sendable send;
+	
+	/** Receiver zum Empfangen von Nachrichten */
 	private Receiver receive;
+	
+	/** Display zum Darstellen empfangener Nachrichten */
 	private Displayable display;
+	
+	/** MultiCast-Gruppe */
 	private InetAddress group;
 
 	
@@ -22,7 +38,9 @@ public class Networkcontroller implements NetworkControllable {
 		this.display = display;
 	}
 	
-	
+	/**
+	 * @see NetworkControllable#initConnection(String, int, int)
+	 */
 	@Override
 	public void initConnection(String ip, int port, int ttl) {
 		
@@ -49,6 +67,9 @@ public class Networkcontroller implements NetworkControllable {
 		
 	}
 	
+	/**
+	 * @see NetworkControllable#closeConnection()
+	 */
 	@Override
 	public void closeConnection() {
 		
@@ -59,12 +80,18 @@ public class Networkcontroller implements NetworkControllable {
 		}
 	}
 
+	/**
+	 * @see NetworkControllable#receive(String)
+	 */
 	@Override
 	public void receive(String content) {
 		if (display != null)
 			display.updateChatDisplay(content);
 	}
 	
+	/**
+	 * @see NetworkControllable#send(String)
+	 */
 	@Override
 	public void send(String content) {
 		send.send(content);

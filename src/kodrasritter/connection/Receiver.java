@@ -11,15 +11,27 @@ import java.io.IOException;
  */
 public class Receiver implements Runnable {
 	
+	/** NetworkController steuert die Verbindungen */
 	private NetworkControllable control;
+	
+	/** BufferedReader zum Einlesen von neuen Nachrichten */
 	private BufferedReader in;
 
+	/**
+	 * Im Konstruktor werden die Attribute initialisiert
+	 * 
+	 * @param control
+	 * @param in
+	 */
 	public Receiver(NetworkControllable control, BufferedReader in) {
 		this.control = control;
 		this.in = in;
 	}
 	
 	
+	/**
+	 * In der run-Methode liest der Client vom Stream neue Nachrichten ein
+	 */
 	@Override
 	public void run() {
 		String input;

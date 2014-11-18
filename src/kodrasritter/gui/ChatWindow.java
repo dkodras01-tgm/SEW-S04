@@ -99,7 +99,9 @@ public class ChatWindow extends JFrame implements Displayable {
 		
 	}
 	
-
+	/**
+	 * @see Displayable#updateChatDisplay(String)
+	 */
 	@Override
 	public void updateChatDisplay(String content) {
 		String timeStamp = new SimpleDateFormat("[dd.MM.yyyy - HH:mm:ss]").format(Calendar.getInstance().getTime());
@@ -108,17 +110,26 @@ public class ChatWindow extends JFrame implements Displayable {
 		
 	}
 
+	/**
+	 * @see Displayable#updateUserInput(String)
+	 */
 	@Override
 	public void updateUserInput(String content) {
 		this.textField.setText(content);
 		
 	}
 
+	/**
+	 * @see Displayable#getUserInput()
+	 */
 	@Override
 	public String getUserInput() {
 		return this.textField.getText();
 	}
 	
+	/**
+	 * @see Displayable#getOptions()
+	 */
 	@Override
 	public List<String> getOptions() {
 		LinkedList<String> list = new LinkedList<String>();
