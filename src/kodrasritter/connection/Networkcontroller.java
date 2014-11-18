@@ -38,6 +38,7 @@ public class Networkcontroller implements NetworkControllable {
 			send = new Sender(new OutputStreamWriter(new DatagramOutputStream(socket, group,
 					port), "UTF8"));
 			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -61,7 +62,7 @@ public class Networkcontroller implements NetworkControllable {
 	@Override
 	public void receive(String content) {
 		if (display != null)
-			display.updateInputDisplay(content);
+			display.updateChatDisplay(content);
 	}
 	
 	@Override

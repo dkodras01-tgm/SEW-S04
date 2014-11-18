@@ -30,6 +30,7 @@ public class DatagramOutputStream extends ByteArrayOutputStream {
 		packet = new DatagramPacket(buf, 0, address, port);
 	}
 
+	@Override
 	public synchronized void flush() throws IOException {
 		if (count >= 65508)
 			throw new IOException("Packet overflow (" + count + ") bytes");

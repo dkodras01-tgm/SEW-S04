@@ -59,7 +59,7 @@ public class ChatWindow extends JFrame{
 		contentPane.add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnSenden = new JButton("Senden");
+		btnSenden = new JButton("Senden");
 		btnSenden.addActionListener(al);
 		panel.add(btnSenden, BorderLayout.EAST);
 		

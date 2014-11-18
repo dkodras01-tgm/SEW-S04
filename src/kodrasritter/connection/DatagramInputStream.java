@@ -26,12 +26,14 @@ public class DatagramInputStream extends InputStream {
 		packet = new DatagramPacket(buffer, 0);
 	}
 
+	@Override
 	public synchronized int read() throws IOException {
 		while (index >= count)
 			receive();
 		return (int) buffer[index++];
 	}
 
+	@Override
 	public synchronized int read(byte[] data, int offset, int length)
 			throws IOException {
 		if (length <= 0)
@@ -45,6 +47,7 @@ public class DatagramInputStream extends InputStream {
 		return length;
 	}
 
+	@Override
 	public synchronized long skip(long amount) throws IOException {
 		if (amount <= 0)
 			return 0;
@@ -56,9 +59,11 @@ public class DatagramInputStream extends InputStream {
 		return amount;
 	}
 
+	@Override
 	public synchronized int available() throws IOException {
 		return count - index;
 	}
+
 
 	private void receive() throws IOException {
 		packet.setLength(buffer.length);

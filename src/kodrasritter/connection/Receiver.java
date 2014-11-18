@@ -11,11 +11,11 @@ import java.io.IOException;
  */
 public class Receiver implements Runnable {
 	
-	private NetworkControllable cm;
+	private NetworkControllable control;
 	private BufferedReader in;
 
-	public Receiver(NetworkControllable cm, BufferedReader in) {
-		this.cm = cm;
+	public Receiver(NetworkControllable control, BufferedReader in) {
+		this.control = control;
 		this.in = in;
 	}
 	
@@ -27,7 +27,7 @@ public class Receiver implements Runnable {
 			//Es wird so lange vom Stream gelesen, so lange dieser nicht null ist
 			while ((input = in.readLine()) != null) {
 				//Zum Empfangen wird receive aufgerufen
-				cm.receive(input);
+				control.receive(input);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
