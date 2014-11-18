@@ -12,7 +12,6 @@ public class ChatMessage extends Message {
 	@Override
 	public void setContent(String content) {
 		super.setContent(content);
-		
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package kodrasritter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import kodrasritter.connection.NetworkControllable;
 import kodrasritter.connection.Networkcontroller;
@@ -26,6 +25,9 @@ public class Controller {
 		dp = new Display(cw);
 		net = new Networkcontroller(dp);
 		initConnection("239.46.194.21", 1234, 10);
+//		net = new Networkcontroller2(dp);
+//		initConnection("127.0.0.1", 1244, 10);
+		
 	}
 	
 	public boolean messageSent(ActionEvent e) {
