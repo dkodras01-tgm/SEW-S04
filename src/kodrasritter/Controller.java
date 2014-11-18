@@ -9,8 +9,11 @@ import kodrasritter.gui.ChatActionListener;
 import kodrasritter.gui.ChatWindow;
 import kodrasritter.gui.Display;
 import kodrasritter.gui.Displayable;
+import kodrasritter.message.Censorship;
 import kodrasritter.message.ChatMessage;
+import kodrasritter.message.DoubleCharacter;
 import kodrasritter.message.Message;
+import kodrasritter.message.UpperCase;
 
 public class Controller {
 	
@@ -34,9 +37,13 @@ public class Controller {
 		
 		Message m = new ChatMessage();
 		m.setContent(dp.getUserInput());
-		
-		// TODO Message je nach Checkboxen dekorieren
-		
+		if(cw.isToUpperCase())
+			m = new UpperCase(m);
+		if(cw.isDoubleLetter())
+			m = new DoubleCharacter(m);
+		if(cw.isCensor())
+			m = new Censorship(m);
+		System.out.println(m.getContent());
 		net.send(m.getContent());
 		dp.updateUserInput("");
 	}

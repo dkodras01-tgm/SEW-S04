@@ -2,13 +2,16 @@ package kodrasritter.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import kodrasritter.Controller;
 
 
-public class ChatActionListener implements ActionListener, WindowListener {
+public class ChatActionListener implements 
+		ActionListener, WindowListener, ItemListener {
 	
 	Controller control;
 	
@@ -62,6 +65,13 @@ public class ChatActionListener implements ActionListener, WindowListener {
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
+		
+	}
+
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 
