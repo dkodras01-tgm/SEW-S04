@@ -2,7 +2,6 @@ package kodrasritter.message;
 
 public class UpperCase extends Modifier {
 	
-	
 	public UpperCase(Message m) {
 		super(m);
 	}
