@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedList;
@@ -88,6 +89,8 @@ public class ChatWindow extends JFrame implements Displayable {
 		
 		this.setTitle(title);
 		this.setVisible(true);
+		
+		this.addWindowListener((WindowListener) al);
 		
 	}
 	

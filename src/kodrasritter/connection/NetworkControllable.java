@@ -18,8 +18,8 @@ public interface NetworkControllable {
 	/**
 	 * Diese Methode empfaengt neue Nachrichten und updatet die Anzeige (Display),
 	 * wenn eine neue Nachricht empfangen wird.<br>
-	 * Voraussetzung ist eine bereits aufgebaute Verbindung mit {@link #initConnection(String, int, int)}.<br>
-	 * Diese Methode wird am Ende von {@link #initConnection(String, int, int)} aufgerufen
+	 * Voraussetzung ist eine bereits aufgebaute Verbindung mit {@link #initConnection(String, int)}.<br>
+	 * Diese Methode wird am Ende von {@link #initConnection(String, int)} aufgerufen
 	 * 
 	 * @throws IOException Fehler waehrend der Kommunikation
 	 */
@@ -27,7 +27,7 @@ public interface NetworkControllable {
 	
 	/**
 	 * Diese Methode dient dem Senden von Nachrichten in Form eines Strings. <br>
-	 * Voraussetzung ist eine mit {@link #initConnection(String, int, int)} bereits
+	 * Voraussetzung ist eine mit {@link #initConnection(String, int)} bereits
 	 * aufgebaute Verbindung.
 	 * 
 	 * @param content Der Content, der gesendet wird.
@@ -45,11 +45,10 @@ public interface NetworkControllable {
 	
 	/**
 	 * Diese Methode dient der Herstellung einer neuen Verbindung.
-	 * Vor dem Senden muss diese ein Mal aufgerufen werden.
+	 * Vor dem erstmaligen Senden muss diese ein Mal aufgerufen werden.
 	 * 
 	 * @param ip Die IP-Adresse, an die die Nachricht geschickt werden soll
 	 * @param port Der Port, ueber die die Kommunikation ablaufen soll
-	 * @param ttl Die "Time-to-Live" des Pakets (max. Anzahl an Routern)
 	 * @throws IOException Fehler beim Initialisieren der Verbindung
 	 */
 	public void initConnection(String ip, int port) throws IOException;
