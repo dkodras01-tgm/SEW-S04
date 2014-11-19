@@ -1,10 +1,11 @@
 package kodrasritter;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import kodrasritter.connection.NetworkControllable;
-import kodrasritter.connection.Networkcontroller;
+import kodrasritter.connection.NetworkController;
 import kodrasritter.gui.ChatActionListener;
 import kodrasritter.gui.ChatWindow;
 import kodrasritter.gui.Displayable;
@@ -20,16 +21,17 @@ public class Controller {
 	private Displayable display;
 	
 	
-	public Controller() {
+	public Controller(String ip, int port, int ttl) {
 		
 		ActionListener al = new ChatActionListener(this);
+		display = new ChatWindow(al, "Multicast-Chat [" + ip + ":" + port + "]");
+		net = new NetworkController(display);
 		
-		display = new ChatWindow(al);
-		net = new Networkcontroller(display);
-		initConnection("239.46.194.21", 1234, 10);
-		
-//		net = new Networkcontroller2(dp);
-//		initConnection("127.0.0.1", 1244, 10);
+		try {
+			net.initConnection(ip, port, ttl);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -50,17 +52,24 @@ public class Controller {
 		
 		m.setContent(m.process());
 		
-		net.send(m.getContent());
+		try {
+			net.send(m.getContent());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		
 		display.updateUserInput("");
 	}
 	
 	public void closeConnection() {
-		net.closeConnection();
+		try {
+			net.closeConnection();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void initConnection(String ip, int port, int ttl) {
-		net.initConnection(ip, port, ttl);
-	}
 	
 	public static void main(String[] args) {
 		
@@ -77,7 +86,7 @@ public class Controller {
 //			new Controller();
 //		}
 		
-		new Controller();
+		new Controller("239.46.194.21", 1234, 1);
 		
 	}
 

@@ -3,6 +3,7 @@ package kodrasritter.gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,9 +14,11 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.BadLocationException;
 
 import kodrasritter.Controller;
 
@@ -26,30 +29,12 @@ public class ChatWindow extends JFrame implements Displayable {
 	private JTextArea textArea;
 	private JTextField textField;
 	private JButton btnSenden;
-	private ActionListener al;
 	private JCheckBox chckbxTouppercase, chckbxCensor, chckbxDoubleletter;
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChatWindow frame = new ChatWindow(new ChatActionListener(new Controller()));
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public ChatWindow(ActionListener al) {
-		this.al = al;
+	public ChatWindow(ActionListener al, String title) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -68,6 +53,7 @@ public class ChatWindow extends JFrame implements Displayable {
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(2, 1));
+		
 		
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2);
@@ -89,12 +75,17 @@ public class ChatWindow extends JFrame implements Displayable {
 		textField.addActionListener(al);
 		panel_1.add(textField);
 		
+		
+		
 		textArea = new JTextArea();
 		textArea.setEditable(false);
-		contentPane.add(textArea, BorderLayout.CENTER);
+//		contentPane.add(textArea, BorderLayout.CENTER);
+		
+		JScrollPane scroll = new JScrollPane(textArea);
+		contentPane.add(scroll, BorderLayout.CENTER);
 		
 		
-		this.setTitle("Special Chat");
+		this.setTitle(title);
 		this.setVisible(true);
 		
 	}
@@ -116,7 +107,7 @@ public class ChatWindow extends JFrame implements Displayable {
 	@Override
 	public void updateUserInput(String content) {
 		this.textField.setText(content);
-		
+		this.scrollToBottom();
 	}
 
 	/**
@@ -144,6 +135,29 @@ public class ChatWindow extends JFrame implements Displayable {
 			list.add("DoubleLetter");
 		
 		return list;
+	}
+	
+	/**
+	 * Diese Methode scrollt ans Ende der textArea.<br>
+	 * Sie wird immer nach dem Empfangen einer neuen Nachricht ({@link #updateChatDisplay(String)}
+	 * aufgerufen.
+	 */
+	private void scrollToBottom() {
+		   
+		int endPosition = this.textArea.getDocument().getLength();
+		Rectangle bottom;
+		try {
+			bottom = this.textArea.modelToView(endPosition);
+			this.textArea.scrollRectToVisible(bottom);
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
+		
+	     
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
 	}
 	
 }

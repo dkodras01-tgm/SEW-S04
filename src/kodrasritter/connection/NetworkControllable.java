@@ -1,5 +1,8 @@
 package kodrasritter.connection;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 /**
  * Dieses Interface stellt eine Netzwerkschnittstelle zum Versenden/Empfangen von Nachrichten dar.<br>
  * Es koennen Nachrichten in Form eines Strings gesendet und Empfangen werden.<br>
@@ -13,38 +16,44 @@ package kodrasritter.connection;
 public interface NetworkControllable {
 	
 	/**
-	 * Diese Methode soll aufgerufen werden, wenn eine Nachricht von einer bereits aufgebauten
-	 * Verbindung empfangen wird.<br>
-	 * Der Inhalt der Nachricht wird als String uebergeben.
+	 * Diese Methode empfaengt neue Nachrichten und updatet die Anzeige (Display),
+	 * wenn eine neue Nachricht empfangen wird.<br>
+	 * Voraussetzung ist eine bereits aufgebaute Verbindung mit {@link #initConnection(String, int, int)}.<br>
+	 * Diese Methode wird am Ende von {@link #initConnection(String, int, int)} aufgerufen
 	 * 
-	 * @param content Der Content, der empfangen wird.
+	 * @throws IOException Fehler waehrend der Kommunikation
 	 */
-	public void receive(String content);
+	public void receive() throws IOException;
 	
 	/**
-	 * Diese Methode dient dem Senden von Nachrichten in einer bereits aufgebauten Verbindung
-	 * in Form eines Strings. <br>
-	 * Der Inhalt der Nachricht wird als String uebergeben.
+	 * Diese Methode dient dem Senden von Nachrichten in Form eines Strings. <br>
+	 * Voraussetzung ist eine mit {@link #initConnection(String, int, int)} bereits
+	 * aufgebaute Verbindung.
 	 * 
 	 * @param content Der Content, der gesendet wird.
+	 * @throws IOException Fehler beim Senden (z.B. Verbindung noch nicht initialisiert)
 	 */
-	public void send(String content);
+	public void send(String content) throws IOException;
 	
 	/**
 	 * Diese Methode dient dem Schliessen einer bestehenden Verbindung.
 	 * Sie soll am Ende der gesamten Kommunikation aufgerufen werden
+	 * 
+	 * @throws IOException Fehler beim Beenden der Kommunikation (z.B. Beenden ohne vorherigen Start)
 	 */
-	public void closeConnection();
+	public void closeConnection() throws IOException;
 	
 	/**
 	 * Diese Methode dient der Herstellung einer neuen Verbindung.
-	 * Vor dem Senden/Empfangen muss diese aufgerufen werden.
+	 * Vor dem Senden muss diese ein Mal aufgerufen werden.
 	 * 
 	 * @param ip Die IP-Adresse, an die die Nachricht geschickt werden soll
 	 * @param port Der Port, ueber die die Kommunikation ablaufen soll
 	 * @param ttl Die "Time-to-Live" des Pakets (max. Anzahl an Routern)
+	 * @throws IOException Fehler beim Initialisieren der Verbindung
 	 */
-	public void initConnection(String ip, int port, int ttl);
+	public void initConnection(String ip, int port, int ttl) throws IOException;
+
 
 	
 }
