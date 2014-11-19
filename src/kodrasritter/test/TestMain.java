@@ -66,7 +66,7 @@ public class TestMain {
 	 */
 	@Test
 	public void testArgs7() {
-		String args = "0.0.0.0 4534";
+		String args = "0.0.dgd.5 4534";
 		assertEquals(false, Main.checkArgs(args.split(" ")));
 	}
 	
@@ -124,58 +124,15 @@ public class TestMain {
 		assertEquals(false, Main.checkArgs(args.split(" ")));
 	}
 	
-	/**
-	 * Testen der Argumente: IP + Port + inkorrekte TTL
-	 */
-	@Test
-	public void testArgs14() {
-		String args = "239.34.3.2 34458 bla";
-		assertEquals(false, Main.checkArgs(args.split(" ")));
-	}
-	
-	/**
-	 * Testen der Argumente: IP + Port + inkorrekte TTL
-	 */
-	@Test
-	public void testArgs15() {
-		String args = "239.34.3.2 34458 0";
-		assertEquals(false, Main.checkArgs(args.split(" ")));
-	}
-	
-	/**
-	 * Testen der Argumente: IP + Port + inkorrekte TTL
-	 */
-	@Test
-	public void testArgs16() {
-		String args = "239.34.3.2 34458 256";
-		assertEquals(false, Main.checkArgs(args.split(" ")));
-	}
-	
-	/**
-	 * Testen der Argumente: IP + Port + TTL
-	 */
-	@Test
-	public void testArgs17() {
-		String args = "239.34.3.2 34458 1";
-		assertEquals(true, Main.checkArgs(args.split(" ")));
-	}
 	
 	/**
 	 * Testen der Argumente: IP + Port
 	 */
 	@Test
-	public void testArgs18() {
+	public void testArgs14() {
 		String args = "239.34.3.2 34458";
 		assertEquals(true, Main.checkArgs(args.split(" ")));
 	}
-	
-	/**
-	 * Testen der Argumente: keines
-	 */
-	@Test
-	public void testArgs19() {
-		String[] args = {};
-		assertEquals(true, Main.checkArgs(args));
-	}
+
 
 }

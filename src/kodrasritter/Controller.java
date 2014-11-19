@@ -23,13 +23,13 @@ public class Controller {
 	private ActionListener al;
 	
 	
-	public Controller(String ip, int port, int ttl) throws IOException {
+	public Controller(String ip, int port) throws IOException {
 		
 		al = new ChatActionListener(this);
 		display = new ChatWindow(al, "Multicast-Chat [" + ip + ":" + port + "]");
 		net = new NetworkController(display);
 		
-		net.initConnection(ip, port, ttl);
+		net.initConnection(ip, port);
 		
 	}
 	

@@ -82,6 +82,7 @@ public class ChatWindow extends JFrame implements Displayable {
 //		contentPane.add(textArea, BorderLayout.CENTER);
 		
 		JScrollPane scroll = new JScrollPane(textArea);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		contentPane.add(scroll, BorderLayout.CENTER);
 		
 		
@@ -98,6 +99,7 @@ public class ChatWindow extends JFrame implements Displayable {
 		String timeStamp = new SimpleDateFormat("[dd.MM.yyyy - HH:mm:ss]").format(Calendar.getInstance().getTime());
 		this.textArea.append(timeStamp + " " + content);
 		this.textArea.append("\n");
+		this.scrollToBottom();
 		
 	}
 
@@ -106,8 +108,7 @@ public class ChatWindow extends JFrame implements Displayable {
 	 */
 	@Override
 	public void updateUserInput(String content) {
-		this.textField.setText(content);
-		this.scrollToBottom();
+		this.textField.setText(content);	
 	}
 
 	/**

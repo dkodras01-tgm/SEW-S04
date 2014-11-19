@@ -28,7 +28,7 @@ public class TestGUI {
 	 */
 	@Before
 	public void init() throws IOException {
-		this.c = new Controller("239.45.2.3", 5643, 1);
+		this.c = new Controller("127.0.0.1", 5643);
 		this.al = c.getAl();
 		this.display = (ChatWindow) c.getDisplay();
 		this.display.setVisible(false);

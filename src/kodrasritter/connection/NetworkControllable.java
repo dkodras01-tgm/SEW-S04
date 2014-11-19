@@ -23,7 +23,7 @@ public interface NetworkControllable {
 	 * 
 	 * @throws IOException Fehler waehrend der Kommunikation
 	 */
-	public void receive() throws IOException;
+	public void receive(String content) throws IOException;
 	
 	/**
 	 * Diese Methode dient dem Senden von Nachrichten in Form eines Strings. <br>
@@ -52,7 +52,7 @@ public interface NetworkControllable {
 	 * @param ttl Die "Time-to-Live" des Pakets (max. Anzahl an Routern)
 	 * @throws IOException Fehler beim Initialisieren der Verbindung
 	 */
-	public void initConnection(String ip, int port, int ttl) throws IOException;
+	public void initConnection(String ip, int port) throws IOException;
 
 
 	

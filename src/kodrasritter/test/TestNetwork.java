@@ -20,7 +20,6 @@ public class TestNetwork {
 
 	private NetworkController nc;
 	private ChatWindow c;
-	private static final String MULTICASTIP = "239.34.12.5";
 	
 	/**
 	 * Initialisieren der Attribute fuer die Testcases
@@ -39,8 +38,8 @@ public class TestNetwork {
 	 */
 	@Test
 	public void testNetworkInit1() throws IOException {
-		nc.initConnection(MULTICASTIP, 5632, 1);
-		assertEquals("239.34.12.5", nc.getGroup().getHostAddress());
+		nc.initConnection("127.0.0.1", 5627);
+//		assertEquals("239.34.12.5", nc.getGroup().getHostAddress());
 		nc.closeConnection();
 	}
 	
@@ -51,9 +50,8 @@ public class TestNetwork {
 	 */
 	@Test
 	public void testNetworkClose() throws IOException {
-		nc.initConnection(MULTICASTIP, 5632, 1);
+		nc.initConnection("127.0.0.1", 5639);
 		nc.closeConnection();
-		assertEquals(null, nc.getSocket().getInetAddress());
 	}
 	
 	/**
@@ -64,7 +62,7 @@ public class TestNetwork {
 	 */
 	@Test
 	public void testNetworkSend1() throws IOException, InterruptedException {
-		nc.initConnection(MULTICASTIP, 5632, 1);
+		nc.initConnection("127.0.0.1", 5631);
 		nc.send("Test");
 		Thread.sleep(100);
 		assertEquals(
@@ -85,7 +83,7 @@ public class TestNetwork {
 	 */
 	@Test
 	public void testNetworkSend2() throws IOException, InterruptedException {
-		nc.initConnection(MULTICASTIP, 5463, 1);
+		nc.initConnection("127.0.0.1", 5463);
 		nc.send("Hallo");
 		nc.send("Test");
 		Thread.sleep(100);
@@ -107,10 +105,10 @@ public class TestNetwork {
 	 */
 	@Test
 	public void testNetworkSend3() throws IOException, InterruptedException {
-		nc.initConnection(MULTICASTIP, 5463, 1);
+		nc.initConnection("127.0.0.1", 5469);
 		nc.send("Hallo");
 		NetworkController nc2 = new NetworkController(c);
-		nc2.initConnection(MULTICASTIP, 5463, 1);
+		nc2.initConnection("127.0.0.1", 5469);
 		nc2.send("Test");
 		Thread.sleep(200);
 		assertEquals(
@@ -131,9 +129,9 @@ public class TestNetwork {
 	 */
 	@Test
 	public void testNetworkSend4() throws IOException, InterruptedException {
-		nc.initConnection(MULTICASTIP, 5463, 1);
+		nc.initConnection("127.0.0.1", 5418);
 		NetworkController nc2 = new NetworkController(c);
-		nc2.initConnection(MULTICASTIP, 5463, 1);
+		nc2.initConnection("127.0.0.1", 5418);
 		nc2.closeConnection();
 		nc.send("Test");
 		Thread.sleep(100);
