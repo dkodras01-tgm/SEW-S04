@@ -160,4 +160,27 @@ public class ChatWindow extends JFrame implements Displayable {
 		return textArea;
 	}
 	
+	
+	
+	public JButton getBtnSenden() {
+		return btnSenden;
+	}
+
+	public JCheckBox getChckbxTouppercase() {
+		return chckbxTouppercase;
+	}
+
+
+	public JCheckBox getChckbxCensor() {
+		return chckbxCensor;
+	}
+
+
+	public JCheckBox getChckbxDoubleletter() {
+		return chckbxDoubleletter;
+	}
+
+	
+	
+	
 }

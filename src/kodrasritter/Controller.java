@@ -20,18 +20,16 @@ public class Controller {
 	private NetworkControllable net;
 	private Displayable display;
 	
+	private ActionListener al;
 	
-	public Controller(String ip, int port, int ttl) {
+	
+	public Controller(String ip, int port, int ttl) throws IOException {
 		
-		ActionListener al = new ChatActionListener(this);
+		al = new ChatActionListener(this);
 		display = new ChatWindow(al, "Multicast-Chat [" + ip + ":" + port + "]");
 		net = new NetworkController(display);
 		
-		try {
-			net.initConnection(ip, port, ttl);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		net.initConnection(ip, port, ttl);
 		
 	}
 	
@@ -70,24 +68,14 @@ public class Controller {
 		}
 	}
 	
-	
-	public static void main(String[] args) {
-		
-//		String file = ClassLoader.getSystemClassLoader().getResource(".").getPath() + "S04.jar";
-//		
-//		if (args.length == 0) {
-//			try {
-//				Runtime.getRuntime().exec(new String[] {"java", "-Djava.net.preferIPv4Stack=true", "-jar", file, "argset"});
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}  
-//		} else {
-//			new Controller();
-//		}
-		
-		new Controller("239.46.194.21", 1234, 1);
-		
+
+	public ActionListener getAl() {
+		return this.al;
+	}
+
+
+	public Displayable getDisplay() {
+		return this.display;
 	}
 
 }

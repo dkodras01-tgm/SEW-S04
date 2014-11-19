@@ -38,6 +38,8 @@ public class NetworkController implements NetworkControllable {
 	
 	/** Multicast-IP-Adresse */
 	private String ip;
+	
+	private boolean stopReceiving;
 
 	/**
 	 * Initialisieren der Chat-Anzeige.<br>
@@ -48,6 +50,7 @@ public class NetworkController implements NetworkControllable {
 	 */
 	public NetworkController(Displayable display) {
 		this.display = display;
+		this.stopReceiving = false;
 	}
 	
 	/**
@@ -81,6 +84,7 @@ public class NetworkController implements NetworkControllable {
 	 */
 	@Override
 	public void closeConnection() throws IOException {
+		this.stopReceiving = true;
 		clientSocket.leaveGroup(group);
 	}
 
@@ -90,27 +94,41 @@ public class NetworkController implements NetworkControllable {
 	 */
 	@Override
 	public void receive() throws IOException {
+		
+		Runnable run = new Runnable() {
 			
-		while (true) {
-			
-			//In diesem Buffer werden die ankommenden Nachrichten zwischengespeichert.
-			//1024 Byte sind ausreichend, da die Nachrichten nicht besonders gross sind.
-			byte[] buf = new byte[1024];
+			@Override
+			public void run() {
+				
+				while (!stopReceiving) {
+					
+					//In diesem Buffer werden die ankommenden Nachrichten zwischengespeichert.
+					//1024 Byte sind ausreichend, da die Nachrichten nicht besonders gross sind.
+					byte[] buf = new byte[1024];
 
-			// Ein neues DatagramPacket wird zum Empfangen der Nachricht initialisiert
-			DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
-			
-			//Nachricht mit DatagramPacket empfangen
-			clientSocket.receive(msgPacket);
-			
-			//Die Nachricht wird in einen String umgewandelt
-			String msg = new String(buf, 0, buf.length);
-			
-			buf = null;
-			
-			//Updaten der Anzeige
-			display.updateChatDisplay(msg);
-		}
+					// Ein neues DatagramPacket wird zum Empfangen der Nachricht initialisiert
+					DatagramPacket msgPacket = new DatagramPacket(buf, buf.length);
+					
+					//Nachricht mit DatagramPacket empfangen
+					try {
+						clientSocket.receive(msgPacket);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+					//Die Nachricht wird in einen String umgewandelt
+					String msg = new String(buf, 0, buf.length);
+					
+					buf = null;
+					
+					//Updaten der Anzeige
+					display.updateChatDisplay(msg);
+				}
+				
+			}
+		};
+		
+		new Thread(run).start();	
 					
 	}
 	
