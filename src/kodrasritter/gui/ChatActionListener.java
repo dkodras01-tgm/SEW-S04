@@ -10,6 +10,7 @@ import kodrasritter.Controller;
 
 public class ChatActionListener implements ActionListener, WindowListener {
 	
+	/** GUI-Controller */
 	Controller control;
 	
 	public ChatActionListener(Controller control) {
