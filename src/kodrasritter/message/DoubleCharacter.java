@@ -2,14 +2,13 @@ package kodrasritter.message;
 
 public class DoubleCharacter extends Modifier {
 
-	Message m;
-	
+
 	public DoubleCharacter(Message m) {
-		this.m = m;
+		super(m);
 	}
 	
 	public String process() {
-		return doubleCharacters(m.process());
+		return doubleCharacters(getMessage().process());
 	}
 	
 	public String doubleCharacters(String content) {

@@ -6,13 +6,10 @@ import java.util.List;
 
 public class Censorship extends Modifier{
 
-	Message m;
-	
 	private HashMap<String, String> change;
 	
 	public Censorship(Message m) {
-		this.m = m;
-		change = new HashMap<String, String>();
+		super(m);
 	}
 	
 	public void addCensoredWords(String censoredWord, String newWord) {
@@ -24,7 +21,7 @@ public class Censorship extends Modifier{
 	}
 	
 	public String process() {
-		return censor(m.process());
+		return censor(getMessage().process());
 	}
 	
 	public String censor(String content) {

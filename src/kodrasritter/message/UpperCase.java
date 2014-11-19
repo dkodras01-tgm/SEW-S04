@@ -2,14 +2,13 @@ package kodrasritter.message;
 
 public class UpperCase extends Modifier {
 	
-	Message m;
 	
 	public UpperCase(Message m) {
-		this.m = m;
+		super(m);
 	}
 	
 	public String process() {
-		return contentUppercase(m.process());
+		return contentUppercase(getMessage().process());
 	}
 	
 	private String contentUppercase(String content) {
