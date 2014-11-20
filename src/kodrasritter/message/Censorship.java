@@ -1,6 +1,7 @@
 package kodrasritter.message;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,9 +16,9 @@ import java.util.List;
  */
 public class Censorship extends Modifier{
 
-	HashMap<String, String> change;
-	//private ArrayList<String> change;
-	
+//	HashMap<String, String> change;
+	private ArrayList<String> change;
+
 	/**
 	 * Im Konstruktor wird der super-Konstrukter aufgerufen
 	 * 
@@ -28,24 +29,31 @@ public class Censorship extends Modifier{
 	}
 	
 	/**
-	 * Zensiertes Wort hinzufuegen
+	 * Zu zensiertende Worte hinzufuegen aus badwords.txt
 	 * 
-	 * @param censoredWord
-	 * @param newWord
-	 * @throws FileNotFoundException 
+	 * @throws IOException 
 	 */
-	public void addCensoredWords(String censoredWord, String newWord) throws FileNotFoundException {
-		change.put(censoredWord, newWord);
-		//RandomAccessFile raf = new RandomAccessFile("./recources/badwords.txt", "rw");
+	public void addCensoredWords() throws IOException {
+		RandomAccessFile raf = new RandomAccessFile("./recources/badwords.txt", "r");
+		String line="";
+		while ((line = raf.readLine())!=null) {
+			change.add(line);
+			line="";
+		}
+		raf.close();
 	}
 	
 	/**
-	 * Zensiertes Wort entfernen
+	 * Zu zensiertes Wort entfernen
 	 * 
 	 * @param censoredWord
 	 */
 	public void removeCensoredWords(String censoredWord) {
-		change.remove(censoredWord);
+		for (int i=0; change.iterator().hasNext(); i++) {
+		     if(change.iterator().next().equals(censoredWord)) {
+		    	 change.remove(i);
+		     }
+		}
 	}
 	
 	/** 
@@ -68,8 +76,8 @@ public class Censorship extends Modifier{
 		List<String> temp = Arrays.asList(content.split(" "));
 		
 		for (int i=0; i<temp.size(); i++) {
-			if (change.containsKey(temp)) {
-				temp.set(i, change.get(temp));
+			if (change.contains(temp)) {
+//				temp.set(i, change.get(temp));
 			}
 		}
 		
@@ -82,6 +90,10 @@ public class Censorship extends Modifier{
 		}
 		
 		return sb.toString();
+	}
+	
+	public ArrayList<String> getChange() {
+		return change;
 	}
 	
 }
