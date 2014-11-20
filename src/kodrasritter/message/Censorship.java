@@ -1,5 +1,8 @@
 package kodrasritter.message;
 
+import java.io.FileNotFoundException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +15,8 @@ import java.util.List;
  */
 public class Censorship extends Modifier{
 
-	private HashMap<String, String> change;
+	HashMap<String, String> change;
+	//private ArrayList<String> change;
 	
 	/**
 	 * Im Konstruktor wird der super-Konstrukter aufgerufen
@@ -28,9 +32,11 @@ public class Censorship extends Modifier{
 	 * 
 	 * @param censoredWord
 	 * @param newWord
+	 * @throws FileNotFoundException 
 	 */
-	public void addCensoredWords(String censoredWord, String newWord) {
+	public void addCensoredWords(String censoredWord, String newWord) throws FileNotFoundException {
 		change.put(censoredWord, newWord);
+		//RandomAccessFile raf = new RandomAccessFile("./recources/badwords.txt", "rw");
 	}
 	
 	/**
