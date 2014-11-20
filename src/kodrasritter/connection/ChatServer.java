@@ -2,8 +2,11 @@ package kodrasritter.connection;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Der ChatServer empfanegt Nachrichten der Clients und sendet diese an alle weiter.
@@ -19,15 +22,14 @@ public class ChatServer implements Server {
 	
 	private ServerSocket server;
 	private HashMap<Client, ClientReceiver> clientThreads;
-	private HashSet<Client> clients;
+	private List<Client> clients;
 	private NetworkControllable control;
 	private boolean beenden;
 	
 	public ChatServer(NetworkControllable nc, int port) throws IOException {
 		server = new ServerSocket(port);
 		clientThreads = new HashMap<Client, ClientReceiver>();
-		clients = new HashSet<Client>();
-		
+		clients = new ArrayList<Client>();
 		beenden = false;
 		
 	}
@@ -43,13 +45,12 @@ public class ChatServer implements Server {
 	}
 	
 	/**
+	 * @throws IOException 
 	 * @see Server#removeClient(Client)
 	 */
-	public void removeClient(Client c) {
+	public void removeClient(Client c) throws IOException {	
 		clientThreads.get(c).beenden();
 		clientThreads.remove(c);
-		clients.remove(c);
-			
 	}
 	
 	/**
@@ -63,10 +64,19 @@ public class ChatServer implements Server {
 	}
 
 	/**
+	 * @throws IOException 
 	 * @see Server#beenden
 	 */
-	public void beenden() {
+	public void beenden() throws IOException {
+		this.updateClients("Der Server wurde beendet!");
 		beenden = true;
+		int size = clients.size();
+		for (int i=0; i<size; i++) {
+			removeClient(clients.get(i));
+		}
+		clients.removeAll(clients);
+			
+			
 	}
 
 	@Override

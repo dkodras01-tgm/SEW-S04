@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import kodrasritter.connection.NetworkControllable;
-
 /**
  * Ein Client empfaengt Nachrichten eines angegebenen Servers.
  * Empfanegt er eine Nachricht, so meldet er sich beim NetworkController.
@@ -20,22 +18,40 @@ public class ChatClient implements Client, Runnable {
 	private BufferedReader in;
 	private PrintWriter out;
 	private NetworkControllable control;
+	private Socket client;
 	
 	public ChatClient(Socket s, NetworkControllable nc) throws IOException {
-		this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-		this.out = new PrintWriter(s.getOutputStream(), true);
+		this.client = s;
+		this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+		this.out = new PrintWriter(client.getOutputStream(), true);
 		this.control = nc;
 		
 	}
 	
+	/**
+	 * @see Client#getSocket()
+	 */
+	public Socket getSocket() {
+		return this.client;
+	}
+	
+	/**
+	 * @see Client#getInput()
+	 */
 	public BufferedReader getInput() {
 		return this.in;
 	}
 	
+	/**
+	 * @see Client#getOutput()
+	 */
 	public PrintWriter getOutput() {
 		return this.out;
 	}
 	
+	/**
+	 * @see Client#send(String)
+	 */
 	public void send(String content) throws IOException {
 		out.println(content);
 	}
@@ -49,7 +65,6 @@ public class ChatClient implements Client, Runnable {
 				control.receive(input);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

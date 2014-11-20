@@ -26,7 +26,7 @@ public class TestNetwork {
 	 */
 	@Before
 	public void init() {
-		c = new ChatWindow(Mockito.mock(ChatActionListener.class), "Testing Chat");
+		c = new ChatWindow(Mockito.mock(ChatActionListener.class));
 		c.setVisible(false);
 		this.nc = new NetworkController(c);
 	}

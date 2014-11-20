@@ -1,15 +1,23 @@
 package kodrasritter;
 
+import java.io.File;
 import java.io.IOException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main {
 
+	private static Logger logger;
+
 	public static void main(String[] args) {
+		
+		logger = LogManager.getLogger(Main.class.getName());
 
 		String usage = "Bitte verwenden Sie folgende Parameter beim Aufruf: <server-ip> <port>";
 
 		if (!checkArgs(args)) {
-			System.out.println(usage);
+			logger.error(usage);
 		} else {
 			try {
 				new Controller(args[0], Integer.parseInt(args[1]));
@@ -34,8 +42,7 @@ public class Main {
 
 		// Ueberpruefen, ob IP 4 Teile hat
 		if (ipparts.length != 4) {
-			System.out
-					.println("Bitte geben Sie eine korrekte IP mit exakt 4 durch einen Punkt getrennten Zahlen an!");
+			logger.error("Bitte geben Sie eine korrekte IP mit exakt 4 durch einen Punkt getrennten Zahlen an!");
 			return false;
 		}
 
@@ -47,14 +54,12 @@ public class Main {
 
 				// Ueberpruefen, ob alle anderen Stellen korrekt sind
 				if ((act < 0) || (act > 255)) {
-					System.out
-							.println("Bitte geben Sie eine korrekte IP an (4 Teile zwischen: >= 0 und <= 255)!");
+					logger.error("Bitte geben Sie eine korrekte IP an (4 Teile zwischen: >= 0 und <= 255)!");
 					return false;
 				}
 
 			} catch (NumberFormatException e) {
-				System.out
-						.println("Die angegebene IP-Adresse darf nur Zahlen und Punkte zur Trennung enthalten!");
+				logger.error("Die angegebene IP-Adresse darf nur Zahlen und Punkte zur Trennung enthalten!");
 				return false;
 			}
 		}
@@ -64,14 +69,12 @@ public class Main {
 			int port = Integer.parseInt(args[1]);
 
 			if ((port < 0) || (port > 65535)) {
-				System.out
-						.println("Der Port muss eine Zahl zwischen 0 und 65535 sein!");
+				logger.error("Der Port muss eine Zahl zwischen 0 und 65535 sein!");
 				return false;
 			}
 
 		} catch (NumberFormatException e) {
-			System.out
-					.println("Der Port muss eine Zahl zwischen 0 und 65535 sein!");
+			logger.error("Der Port muss eine Zahl zwischen 0 und 65535 sein!");
 			return false;
 		}
 

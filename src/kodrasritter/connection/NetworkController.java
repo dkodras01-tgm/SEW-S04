@@ -2,6 +2,7 @@ package kodrasritter.connection;
 
 import java.io.IOException;
 import java.net.ConnectException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +14,7 @@ public class NetworkController implements NetworkControllable {
 	private Client client;
 	private Server server;
 	private Displayable display;
+	private String serverIP;
 	
 	public NetworkController(Displayable display) {
 		this.display = display;
@@ -32,7 +34,6 @@ public class NetworkController implements NetworkControllable {
 	@Override
 	public void closeConnection() throws IOException {
 		if (server != null) {
-			this.server.updateClients("Der Server wurde beendet!");
 			this.server.beenden();
 		}
 	}
@@ -45,22 +46,24 @@ public class NetworkController implements NetworkControllable {
 		try {
 			new Socket(ip, port);
 			
-//			final Socket sock = new Socket();
-//			final int timeOut = (int)TimeUnit.SECONDS.toMillis(1); // 5 sec wait period
-//			sock.connect(new InetSocketAddress("host", 8080), timeOut);
+			//Mit vorhandenem Server verbinden
+			this.client = new ChatClient(new Socket(ip, port), this);
+			this.serverIP = ip;
 			
 		} catch (ConnectException e) {			
 			
+			//Neuen Server erstellen und mit diesem verbinden
 			this.server = new ChatServer(this, port);
 			new Thread(this.server).start();
-			
+			this.client = new ChatClient(new Socket("127.0.0.1", port), this);
+			this.serverIP = InetAddress.getLocalHost().getHostAddress();
+				
 		}
 		
-		this.client = new ChatClient(new Socket(ip, port), this);	
+		//Titel des Chats wird auf die IP des Servers geandert
+		this.display.setDisplayTitle("Chat [" + serverIP + ":" + port + "]");	
 		
-		new Thread(this.client).start();
-
-		
+		new Thread(this.client).start();	
 		
 	}
 	

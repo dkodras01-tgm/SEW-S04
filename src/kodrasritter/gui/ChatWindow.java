@@ -35,7 +35,7 @@ public class ChatWindow extends JFrame implements Displayable {
 	/**
 	 * Create the frame.
 	 */
-	public ChatWindow(ActionListener al, String title) {
+	public ChatWindow(ActionListener al) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -87,7 +87,7 @@ public class ChatWindow extends JFrame implements Displayable {
 		contentPane.add(scroll, BorderLayout.CENTER);
 		
 		
-		this.setTitle(title);
+		this.setDisplayTitle("Chat");
 		this.setVisible(true);
 		
 		this.addWindowListener((WindowListener) al);
@@ -158,6 +158,13 @@ public class ChatWindow extends JFrame implements Displayable {
 		}
 		
 	     
+	}
+	
+	/**
+	 * @see Displayable#setTitle()
+	 */
+	public void setDisplayTitle(String title){
+		this.setTitle(title);
 	}
 
 	public JTextArea getTextArea() {

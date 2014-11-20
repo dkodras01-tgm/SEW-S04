@@ -24,8 +24,9 @@ public interface Server extends Runnable {
 	 * Das heisst, dass er ab sofort nicht mehr die Nachrichten des Servers erhaelt.
 	 * 
 	 * @param c
+	 * @throws IOException 
 	 */
-	public void removeClient(Client c);
+	public void removeClient(Client c) throws IOException;
 	
 	/**
 	 * In dieser Methode wird eine Nachricht an alle angemeldeten Clients verschickt.
@@ -37,7 +38,8 @@ public interface Server extends Runnable {
 	
 	/**
 	 * Mit Aufruf dieser Methode wird der Server beendet
+	 * @throws IOException 
 	 */
-	public void beenden();
+	public void beenden() throws IOException;
 
 }
