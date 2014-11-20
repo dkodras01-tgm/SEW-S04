@@ -36,28 +36,32 @@ public class Controller {
 	
 	public void send() {
 		
-		Message m = new ChatMessage();
-		m.setContent(display.getUserInput());
-		
-		List<String> options = display.getOptions();
-		
-		if (options.contains("ToUpperCase"))
-			m = new UpperCase(m);
-		if (options.contains("DoubleLetter"))
-			m = new DoubleCharacter(m);
-		if (options.contains("Censor"))
-			m = new Censorship(m);
-		
-		m.setContent(m.process());
-		
 		try {
+
+			Message m = new ChatMessage();
+			m.setContent(display.getUserInput());
+
+			List<String> options = display.getOptions();
+
+			if (options.contains("Censor"))
+				m = new Censorship(m);
+			if (options.contains("ToUpperCase"))
+				m = new UpperCase(m);
+			if (options.contains("DoubleLetter"))
+				m = new DoubleCharacter(m);
+			
+
+			m.setContent(m.process());
+
 			net.send(m.getContent());
-		} catch (IOException e) {
-			e.printStackTrace();
+
+			display.updateUserInput("");
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 
 		
-		display.updateUserInput("");
+		
 	}
 	
 	public void closeConnection() {

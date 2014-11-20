@@ -23,9 +23,12 @@ public class Censorship extends Modifier{
 	 * Im Konstruktor wird der super-Konstrukter aufgerufen
 	 * 
 	 * @param m
+	 * @throws IOException 
 	 */
-	public Censorship(Message m) {
+	public Censorship(Message m) throws IOException {
 		super(m);
+		this.change = new ArrayList<String>();
+		this.addCensoredWords();
 	}
 	
 	/**
@@ -34,11 +37,11 @@ public class Censorship extends Modifier{
 	 * @throws IOException 
 	 */
 	public void addCensoredWords() throws IOException {
-		RandomAccessFile raf = new RandomAccessFile("./recources/badwords.txt", "r");
-		String line="";
+		RandomAccessFile raf = new RandomAccessFile("./resources/badwords.txt", "r");
+		String line;
 		while ((line = raf.readLine())!=null) {
-			change.add(line);
-			line="";
+			change.add(line.toLowerCase());
+			line = null;
 		}
 		raf.close();
 	}
@@ -73,12 +76,16 @@ public class Censorship extends Modifier{
 	 */
 	public String censor(String content) {
 		
-		List<String> temp = Arrays.asList(content.split(" "));
+		
+		List<String> temp = Arrays.asList(content.toLowerCase().split(" "));
 		
 		for (int i=0; i<temp.size(); i++) {
-			if (change.contains(temp)) {
-//				temp.set(i, change.get(temp));
+			for (int k=0; k<change.size(); k++) {
+				if (temp.get(i).equalsIgnoreCase(change.get(k))) {
+					temp.set(i, "$%&*");
+				}
 			}
+			
 		}
 		
 		StringBuilder sb = new StringBuilder();

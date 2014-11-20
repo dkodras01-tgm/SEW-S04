@@ -8,11 +8,9 @@ import org.apache.logging.log4j.Logger;
 
 public class Main {
 
-	private static Logger logger;
+	private static Logger logger = LogManager.getLogger(Main.class.getName());;
 
 	public static void main(String[] args) {
-		
-		logger = LogManager.getLogger(Main.class.getName());
 
 		String usage = "Bitte verwenden Sie folgende Parameter beim Aufruf: <server-ip> <port>";
 

@@ -52,7 +52,8 @@ public class TestMessage {
 		
 		ArrayList<String> al1 = new ArrayList<String>();
 		ArrayList<String> al2 = new ArrayList<String>();
-		RandomAccessFile raf = new RandomAccessFile("./recources/badwords.txt", "r");
+//		RandomAccessFile raf = new RandomAccessFile("./recources/badwords.txt", "r");
+		RandomAccessFile raf = new RandomAccessFile("../../../resources/badwords.txt", "r");
 		String line="";
 		while ((line = raf.readLine())!=null) {
 			al1.add(line);
