@@ -11,7 +11,7 @@ import java.util.List;
 public interface Displayable {
 
 	/**
-	 * In dieser Methode wird das Display, das heißt der Bereich, der zur Darstellung
+	 * In dieser Methode wird das Display, das heisst der Bereich, der zur Darstellung
 	 * der Chatnachrichten verwendet wird, geupdated.<br>
 	 * Dabei wird der angegebene Content (Nachricht) zur Anzeige hinzugefuegt
 	 * 
