@@ -3,6 +3,7 @@ package kodrasritter.connection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Socket;
 
 /**
  * Dieses Interface stellt einen Client dar, welche einfache Nachrichten in Form eines Strings von
@@ -29,6 +30,13 @@ public interface Client extends Runnable {
 	 * @return Printwriter des Clients
 	 */
 	public PrintWriter getOutput();
+	
+	/**
+	 * Gibt den Socket des Clients zurueck
+	 * 
+	 * @return Socket des Clients
+	 */
+	public Socket getSocket();
 	
 	/**
 	 * In dieser Methode werden die Nachrichten des Clients an den Server gesendet

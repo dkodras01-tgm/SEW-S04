@@ -26,7 +26,9 @@ public class ClientReceiver implements Runnable {
 		while (!beenden) {
 			String inputLine;
 			try {
+				//Nachricht vom Client empfangen
 				while ((inputLine = c.getInput().readLine()) != null) {
+					//Empfangene Nachrichten an alle Clients senden
 					s.updateClients(inputLine);
 				}
 			} catch (IOException e) {
@@ -37,6 +39,9 @@ public class ClientReceiver implements Runnable {
 		
 	}
 	
+	/**
+	 * Setzt ein Attribut, um das Empfangen von Nachrichten eines Clients zu beenden
+	 */
 	public void beenden() {
 		this.beenden = true;
 	}

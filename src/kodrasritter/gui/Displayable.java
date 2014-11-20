@@ -34,6 +34,13 @@ public interface Displayable {
 	 */
 	public String getUserInput();
 	
+	/**
+	 * Mit Hilfe dieser Methode wird der Titel der Chat-Anzeige gesetzt.
+	 * 
+	 * @param content Der einzustellende Titel
+	 */
+	public void setDisplayTitle(String content);
+	
 	
 	/**
 	 * Diese Methode gibt die vom User gewuenschten Chat-Optionen zurueck. <br>

@@ -26,7 +26,7 @@ public class Controller {
 	public Controller(String ip, int port) throws IOException {
 		
 		al = new ChatActionListener(this);
-		display = new ChatWindow(al, "Chat [" + ip + ":" + port + "]");
+		display = new ChatWindow(al);
 		net = new NetworkController(display);
 		
 		net.initConnection(ip, port);
@@ -67,6 +67,7 @@ public class Controller {
 			e.printStackTrace();
 		}
 	}
+
 	
 
 	public ActionListener getAl() {

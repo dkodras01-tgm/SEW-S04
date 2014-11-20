@@ -1,7 +1,6 @@
 package kodrasritter.connection;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 /**
  * Dieses Interface stellt eine Netzwerkschnittstelle zum Versenden/Empfangen von Nachrichten dar.<br>
