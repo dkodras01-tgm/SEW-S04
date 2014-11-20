@@ -1,16 +1,38 @@
 package kodrasritter.message;
 
+/**
+ * Kasse um alle Buchstaben zwei mal aus zu geben.
+ * 
+ * @author Dominik Kodras
+ * @version 1.0
+ */
 public class DoubleCharacter extends Modifier {
 
 
+	/**
+	 * Konstruktor ruft den super-Konstruktor von Modifier
+	 * 
+	 * @param m
+	 */
 	public DoubleCharacter(Message m) {
 		super(m);
 	}
 	
+	/**
+	 * Verdopplung wird ausgefuehrt
+	 * 
+	 * @return 
+	 */
 	public String process() {
 		return doubleCharacters(getMessage().process());
 	}
 	
+	/**
+	 * Alle Buchstaben werden verdoppelt
+	 * 
+	 * @param content
+	 * @return verdoppelter Text
+	 */
 	public String doubleCharacters(String content) {
 		
 		StringBuilder sb = new StringBuilder();
