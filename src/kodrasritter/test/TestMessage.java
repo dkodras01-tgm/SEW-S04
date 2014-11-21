@@ -32,53 +32,76 @@ public class TestMessage {
 	 * Testen ob alle Buchstaben doppelt zurueckgegeben werden
 	 */
 	@Test
+	public void testDoubleCharacter2() {
+		Message m = new ChatMessage();
+		DoubleCharacter dc = new DoubleCharacter(m);
+		m.setContent("&%!");
+		assertEquals("&&%%!!", dc.process());
+	}
+	
+	/**
+	 * Testen ob alle Buchstaben doppelt zurueckgegeben werden
+	 */
+	@Test
 	public void testDoubleCharacter() {
 		Message m = new ChatMessage();
 		DoubleCharacter dc = new DoubleCharacter(m);
-		m.setContent("bla");
-		assertEquals("bbllaa", dc.process());
+		m.setContent("Bla");
+		assertEquals("BBllaa", dc.process());
 	}
 	
 	/**
-	 * Testen ob alle boesen Woerter in die ArrayList eingelesen werden
+	 * Testen ob alle boesen Woerter zensiert werden
 	 * @throws IOException 
 	 */
 	@Test
-	public void testAddCensoredWords() throws IOException {
-		boolean success = false;
+	public void testCensor1() throws IOException {
 		Message m = new ChatMessage();
-		Censorship c = new Censorship(m);
-		c.addCensoredWords();
-		
-		ArrayList<String> al1 = new ArrayList<String>();
-		ArrayList<String> al2 = new ArrayList<String>();
-//		RandomAccessFile raf = new RandomAccessFile("./recources/badwords.txt", "r");
-		RandomAccessFile raf = new RandomAccessFile("../../../resources/badwords.txt", "r");
-		String line="";
-		while ((line = raf.readLine())!=null) {
-			al1.add(line);
-			line="";
-		}
-		raf.close();
-		al2 = c.getChange();
-		if(al1==al2)
-			success = true;
-		System.out.println(success);
-		assertTrue(success);
+		m.setContent("shit");
+		m = new Censorship(m);
+		m.setContent(m.process());
+		assertEquals("$%&*", m.getContent());
 	}
 	
 	/**
-	 * Testen ob das Enfernen von einem Wort aus der ArrayList funktioniert
+	 * Testen ob alle boesen Woerter zensiert werden
 	 * @throws IOException 
 	 */
 	@Test
-	public void testRemoveCensoredWords() throws IOException {
+	public void testCensor2() throws IOException {
 		Message m = new ChatMessage();
-		Censorship c = new Censorship(m);
-		c.addCensoredWords();
-		String s;
-		c.removeCensoredWords(s = c.getChange().iterator().next());
-		assertNotSame(s, c.getChange().iterator().next());
+		m.setContent("shit fuck");
+		m = new Censorship(m);
+		m.setContent(m.process());
+		assertEquals("$%&* $%&*", m.getContent());
 	}
+	
+	/**
+	 * Testen ob alle boesen Woerter zensiert werden
+	 * @throws IOException 
+	 */
+	@Test
+	public void testCensor3() throws IOException {
+		Message m = new ChatMessage();
+		m.setContent("hallo fuck");
+		m = new Censorship(m);
+		m.setContent(m.process());
+		assertEquals("hallo $%&*", m.getContent());
+	}
+	
+	/**
+	 * Testen ob alle boesen Woerter zensiert werden
+	 * @throws IOException 
+	 */
+	@Test
+	public void testCensor4() throws IOException {
+		Message m = new ChatMessage();
+		m.setContent("hallo");
+		m = new Censorship(m);
+		m.setContent(m.process());
+		assertEquals("hallo", m.getContent());
+	}
+	
+	
 	
 }

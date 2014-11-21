@@ -46,19 +46,6 @@ public class Censorship extends Modifier{
 		raf.close();
 	}
 	
-	/**
-	 * Zu zensiertes Wort entfernen
-	 * 
-	 * @param censoredWord
-	 */
-	public void removeCensoredWords(String censoredWord) {
-		for (int i=0; change.iterator().hasNext(); i++) {
-		     if(change.iterator().next().equals(censoredWord)) {
-		    	 change.remove(i);
-		     }
-		}
-	}
-	
 	/** 
 	 * Zensur wird ausgefuehrt
 	 * 
