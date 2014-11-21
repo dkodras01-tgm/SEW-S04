@@ -22,7 +22,7 @@ public abstract class Message {
 	/**
 	 * Setzt den Inhalt der Nachricht
 	 * 
-	 * @param content
+	 * @param content Inhalt einer Nachricht, der gesetzt werden soll
 	 */
 	public void setContent(String content) {
 		this.content = content;

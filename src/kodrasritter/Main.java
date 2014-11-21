@@ -5,6 +5,12 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Main-Methode, Ueberpruefung der Kommandozeilenargumente, Initialisierung Chat
+ * 
+ * @author Mathias Ritter 4AHIT
+ * @version 1.0
+ */
 public class Main {
 
 	private static Logger logger = LogManager.getLogger(Main.class.getName());;
@@ -13,10 +19,13 @@ public class Main {
 
 		String usage = "Bitte verwenden Sie folgende Parameter beim Aufruf: <server-ip> <port>";
 
+		//Kommandozeilenargumente ueberprufen
 		if (!checkArgs(args)) {
 			logger.error(usage);
 		} else {
 			try {
+				logger.info("Chat starting...");
+				//Neuen Chat initialisieren (Mit angegebener IP und Port)
 				new Controller(args[0], Integer.parseInt(args[1]));
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
@@ -28,6 +37,12 @@ public class Main {
 
 	}
 
+	/**
+	 * Ueberpruefung der Kommandozeilenargumente
+	 * 
+	 * @param args Kommandozeileargumente
+	 * @return Ob Argumente korrekt
+	 */
 	public static boolean checkArgs(String[] args) {
 
 		if (args.length != 2) {

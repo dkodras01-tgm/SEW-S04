@@ -20,6 +20,13 @@ public class ChatClient implements Client, Runnable {
 	private NetworkControllable control;
 	private Socket client;
 	
+	/**
+	 * Abfragen der Streams von einem angegebenen Socket, Initialisierung aller Attribute
+	 * 
+	 * @param s Socket
+	 * @param nc Networkcontroller
+	 * @throws IOException Exception beim Abfragen des Streams vom Socket
+	 */
 	public ChatClient(Socket s, NetworkControllable nc) throws IOException {
 		this.client = s;
 		this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));

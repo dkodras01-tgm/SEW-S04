@@ -15,6 +15,12 @@ import kodrasritter.message.DoubleCharacter;
 import kodrasritter.message.Message;
 import kodrasritter.message.UpperCase;
 
+/**
+ * Dient zur Kommunikation zwischen GUI und Netzwerkcontroller.
+ * 
+ * @author Mathias Ritter 4AHIT
+ * @version 1.0
+ */
 public class Controller {
 	
 	private NetworkControllable net;
@@ -22,7 +28,13 @@ public class Controller {
 	
 	private ActionListener al;
 	
-	
+	/**
+	 * Initialisierung Anzeige (GUI) und Netzwerkkommunikation
+	 * 
+	 * @param ip Die IP des Servers (Falls kein Server vorhanden, wird ein neuer Server lokal erstellt)
+	 * @param port Port, ueber den die Kommunikation laufen soll
+	 * @throws IOException Fehler beim Initialisieren der Connection
+	 */
 	public Controller(String ip, int port) throws IOException {
 		
 		al = new ChatActionListener(this);
@@ -34,13 +46,21 @@ public class Controller {
 	}
 	
 	
+	/**
+	 * Senden einer Nachricht <br>
+	 * Dabei wird der Userinput von der Anzeige genommen und eine ChatMessage erstellt.<br>
+	 * Diese wird je nach ausgewaehlten Optionen dekoriert (Decorator Pattern).<br>
+	 * Danach wird der Inhalt der Nachricht mittels des Networkcontrollers gesendet.
+	 */
 	public void send() {
 		
 		try {
 
+			//Neue ChatMessage mit Inhalt der Benutzereingabe
 			Message m = new ChatMessage();
 			m.setContent(display.getUserInput());
 
+			//Angehakte Optionen abfragen
 			List<String> options = display.getOptions();
 
 			if (options.contains("Censor"))
@@ -50,20 +70,26 @@ public class Controller {
 			if (options.contains("DoubleLetter"))
 				m = new DoubleCharacter(m);
 			
-
+			//Chatnachricht verarbeiten
 			m.setContent(m.process());
 
+			//Inhalt senden
 			net.send(m.getContent());
 
+			//Benutzereingabe zuruecksetzen
 			display.updateUserInput("");
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		
 		
 	}
 	
+	/**
+	 * Beenden der Connection (Aufruf einer entsprechenden Methode im Networkcontroller).
+	 */
 	public void closeConnection() {
 		try {
 			net.closeConnection();
@@ -72,13 +98,20 @@ public class Controller {
 		}
 	}
 
-	
-
+	/**
+	 * Rueckgabe des aktuellen Actionlisteners fuer die Anzeige.
+	 * 
+	 * @return Den ActionListener
+	 */
 	public ActionListener getAl() {
 		return this.al;
 	}
 
-
+	/**
+	 * Rueckgabe der aktuell verwendeten Anzeige.
+	 * 
+	 * @return Die Anzeige 
+	 */
 	public Displayable getDisplay() {
 		return this.display;
 	}

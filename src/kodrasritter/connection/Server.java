@@ -23,8 +23,8 @@ public interface Server extends Runnable {
 	 * In dieser Methode wird ein Client abgemeldet.<br>
 	 * Das heisst, dass er ab sofort nicht mehr die Nachrichten des Servers erhaelt.
 	 * 
-	 * @param c
-	 * @throws IOException 
+	 * @param c Client, der abgemeldet werden soll
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	public void removeClient(Client c) throws IOException;
 	
@@ -38,7 +38,7 @@ public interface Server extends Runnable {
 	
 	/**
 	 * Mit Aufruf dieser Methode wird der Server beendet
-	 * @throws IOException 
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	public void beenden() throws IOException;
 

@@ -5,6 +5,12 @@ import kodrasritter.Main;
 
 import org.junit.Test;
 
+/**
+ * Testen der Ueberpruefung von Kommandozeilenargumenten
+ * 
+ * @author Mathias Ritter 4AHIT
+ * @version 1.0
+ */
 public class TestMain {
 
 	/**

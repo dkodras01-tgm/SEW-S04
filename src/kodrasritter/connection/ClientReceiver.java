@@ -15,6 +15,12 @@ public class ClientReceiver implements Runnable {
 	private Server s;
 	private boolean beenden;
 	
+	/**
+	 * Client und Server festlegen
+	 * 
+	 * @param c Client
+	 * @param s Server
+	 */
 	public ClientReceiver(Client c, Server s) {
 		this.s = s;
 		this.c = c;

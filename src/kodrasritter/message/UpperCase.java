@@ -12,7 +12,7 @@ public class UpperCase extends Modifier {
 	/**
 	 * Konstruktor ruft den super-Konstruktor auf
 	 * 
-	 * @param m
+	 * @param m Message
 	 */
 	public UpperCase(Message m) {
 		super(m);
@@ -30,7 +30,7 @@ public class UpperCase extends Modifier {
 	/**
 	 * Nachricht wird in Grossbuchstaben umgewandelt
 	 * 
-	 * @param content
+	 * @param content Inhalt einer Nachricht
 	 * @return grossgeschriebene Nachricht
 	 */
 	private String contentUppercase(String content) {

@@ -8,10 +8,17 @@ import kodrasritter.connection.NetworkController;
 import kodrasritter.gui.ChatActionListener;
 import kodrasritter.gui.ChatWindow;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+/**
+ * Testen der Connection
+ * 
+ * @author Mathias Ritter 4AHIT
+ * @version 1.0
+ */
 public class TestNetwork {
 
 	private NetworkController nc;
@@ -30,7 +37,7 @@ public class TestNetwork {
 	/**
 	 * Testen, ob eine Connection aufgebaut werden kann
 	 * 
-	 * @throws IOException
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	@Test
 	public void testNetworkInit1() throws IOException {
@@ -41,7 +48,7 @@ public class TestNetwork {
 	/**
 	 * Testen, ob eine Connection auch wieder erfolgreich beendet wird
 	 * 
-	 * @throws IOException
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	@Test
 	public void testNetworkClose() throws IOException {
@@ -52,8 +59,8 @@ public class TestNetwork {
 	/**
 	 * Testen, ob eine gesendete Nachricht korrekt ankommt
 	 * 
-	 * @throws IOException
-	 * @throws InterruptedException
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
+	 * @throws InterruptedException Auftreten eines Interruptes
 	 */
 	@Test
 	public void testNetworkSend1() throws IOException, InterruptedException {
@@ -73,8 +80,8 @@ public class TestNetwork {
 	/**
 	 * Testen, ob eine gesendete Nachricht nach einer bereits anderen gesendeten ankommt
 	 * 
-	 * @throws IOException
-	 * @throws InterruptedException
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
+	 * @throws InterruptedException Auftreten eines Interruptes
 	 */
 	@Test
 	public void testNetworkSend2() throws IOException, InterruptedException {
@@ -95,8 +102,8 @@ public class TestNetwork {
 	/**
 	 * Testen, ob eine ueber eine zweite Connection gesendete Nachricht auch bei der ersten ankommt
 	 * 
-	 * @throws IOException
-	 * @throws InterruptedException
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
+	 * @throws InterruptedException Auftreten eines Interruptes
 	 */
 	@Test
 	public void testNetworkSend3() throws IOException, InterruptedException {
@@ -119,8 +126,8 @@ public class TestNetwork {
 	/**
 	 * Testen, ob eine Nachricht auch ankommt, wenn eine zweite Connection auf und wieder abgebaut wird.
 	 * 
-	 * @throws IOException
-	 * @throws InterruptedException
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
+	 * @throws InterruptedException Auftreten eines Interruptes
 	 */
 	@Test
 	public void testNetworkSend4() throws IOException, InterruptedException {
@@ -142,11 +149,20 @@ public class TestNetwork {
 	
 	/**
 	 * Testen, ob ohne Initialisierung einer Connection eine Exception beim Senden geworfen wird.
-	 * @throws IOException
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	@Test (expected=NullPointerException.class)
 	public void testNetworkSend5() throws IOException {
 		nc.send("Test");
+	}
+	
+	/**
+	 * Beenden der Connection
+	 * @throws IOException Fehler bei Netzwerkkommuniktation
+	 */
+	@After
+	public void close() throws IOException {
+		this.nc.closeConnection();
 	}
 
 }

@@ -10,6 +10,12 @@ import kodrasritter.gui.ChatWindow;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Testen der GUI
+ * 
+ * @author Mathias Ritter 4AHIT
+ * @version 1.0
+ */
 public class TestGUI {
 	
 	private ChatWindow display;
@@ -19,11 +25,11 @@ public class TestGUI {
 	/**
 	 * Initialisieren der Attribute
 	 * 
-	 * @throws IOException
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	@Before
 	public void init() throws IOException {
-		this.c = new Controller("127.0.0.1", 5643);
+		this.c = new Controller("127.0.0.1", 5642);
 		this.display = (ChatWindow) c.getDisplay();
 		this.display.setVisible(false);
 	}
@@ -59,7 +65,7 @@ public class TestGUI {
 	/**
 	 * Testen, ob eine Eingabe richtig gesendet wird
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException Auftreten eines Interruptes
 	 */
 	@Test
 	public void testSendenEmpfangen1() throws InterruptedException {
@@ -78,7 +84,7 @@ public class TestGUI {
 	/**
 	 * Testen, ob eine Eingabe richtig mit dem Modifier ToUpperCase gesendet wird
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException Auftreten eines Interruptes
 	 */
 	@Test
 	public void testSendenEmpfangen2() throws InterruptedException {
@@ -96,9 +102,9 @@ public class TestGUI {
 	}
 	
 	/**
-	 * Testen, ob eine Eingabe richtig mit zwei Modifiern (ToUpeprCase & DoubleLetter) gesendet wird
+	 * Testen, ob eine Eingabe richtig mit zwei Modifiern (ToUpeprCase und DoubleLetter) gesendet wird
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException Auftreten eines Interruptes
 	 */
 	@Test
 	public void testSendenEmpfangen3() throws InterruptedException {
@@ -119,7 +125,7 @@ public class TestGUI {
 	/**
 	 * Testen, ob eine Eingabe korrekt mit dem Modifier DoubleLetter gesendet wird
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedException Auftreten eines Interruptes
 	 */
 	@Test
 	public void testSendenEmpfangen4() throws InterruptedException {
@@ -134,6 +140,26 @@ public class TestGUI {
 						.substring(
 								display.getTextArea().getText().lastIndexOf(']') + 2,
 								display.getTextArea().getText().lastIndexOf('t') + 1));
+	}
+	
+	/**
+	 * Testen, ob eine Eingabe korrekt mit dem Modifier Censor gesendet wird
+	 * 
+	 * @throws InterruptedException Auftreten eines Interruptes
+	 */
+	@Test
+	public void testSendenEmpfangen5() throws InterruptedException {
+		display.updateUserInput("Shit");
+		display.getChckbxCensor().doClick();
+		display.getBtnSenden().doClick();
+		Thread.sleep(100);
+		assertEquals(
+				"$%&*",
+				display.getTextArea()
+						.getText()
+						.substring(
+								display.getTextArea().getText().lastIndexOf(']') + 2,
+								display.getTextArea().getText().lastIndexOf('*') + 1));
 	}
 	
 	/**
@@ -170,7 +196,7 @@ public class TestGUI {
 	 * Testen, ob bei Auswahl einer Option und wieder Deaktivierung dieser Option auch
 	 * keine Option zurueckgegeben wird.
 	 * 
-	 * @throws InterruptedException 
+	 * @throws InterruptedException Auftreten eines Interrupts
 	 */
 	@Test
 	public void testOptions4() throws InterruptedException {

@@ -12,6 +12,12 @@ import kodrasritter.message.UpperCase;
 
 import org.junit.Test;
 
+/**
+ * Testen der Messages (Decorator-Pattern)
+ * 
+ * @author Dominik Kodras
+ * @version 1.0
+ */
 public class TestMessage {
 
 	/**
@@ -49,7 +55,7 @@ public class TestMessage {
 	
 	/**
 	 * Testen ob alle boesen Woerter zensiert werden
-	 * @throws IOException 
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	@Test
 	public void testCensor1() throws IOException {
@@ -62,7 +68,7 @@ public class TestMessage {
 	
 	/**
 	 * Testen ob alle boesen Woerter zensiert werden
-	 * @throws IOException 
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	@Test
 	public void testCensor2() throws IOException {
@@ -75,7 +81,7 @@ public class TestMessage {
 	
 	/**
 	 * Testen ob alle boesen Woerter zensiert werden
-	 * @throws IOException 
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	@Test
 	public void testCensor3() throws IOException {
@@ -88,7 +94,7 @@ public class TestMessage {
 	
 	/**
 	 * Testen ob alle boesen Woerter zensiert werden
-	 * @throws IOException 
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	@Test
 	public void testCensor4() throws IOException {

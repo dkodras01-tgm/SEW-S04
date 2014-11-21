@@ -20,9 +20,15 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
 
-@SuppressWarnings("serial")
+/**
+ * Diese Klasse implementiert das Interface {@link Displayable}
+ * 
+ * @author Dominik Kodras
+ * @version 1.0
+ */
 public class ChatWindow extends JFrame implements Displayable {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextArea textArea;
 	private JTextField textField;
@@ -30,7 +36,9 @@ public class ChatWindow extends JFrame implements Displayable {
 	private JCheckBox chckbxTouppercase, chckbxCensor, chckbxDoubleletter;
 
 	/**
-	 * Create the frame.
+	 * Erstellen des Frames
+	 * 
+	 * @param al Der Action-Listener fuer diese GUI
 	 */
 	public ChatWindow(ActionListener al) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -158,7 +166,7 @@ public class ChatWindow extends JFrame implements Displayable {
 	}
 	
 	/**
-	 * @see Displayable#setTitle()
+	 * @see Displayable#setDisplayTitle(String)
 	 */
 	public void setDisplayTitle(String title){
 		this.setTitle(title);

@@ -24,6 +24,13 @@ public class ChatServer implements Server {
 	private NetworkControllable control;
 	private boolean beenden;
 	
+	/**
+	 * Festlegen des Ports und Initialisieren aller anderen Attribute
+	 * 
+	 * @param nc Networkcontroller
+	 * @param port Port, ueber den die Kommunikation laufen soll
+	 * @throws IOException Fehler waehrend der Kommunikation
+	 */
 	public ChatServer(NetworkControllable nc, int port) throws IOException {
 		server = new ServerSocket(port);
 		clientThreads = new HashMap<Client, ClientReceiver>();
@@ -36,6 +43,7 @@ public class ChatServer implements Server {
 	 * @see Server#addClient(Client)
 	 */
 	public void addClient(Client c) {
+		//Neuen Client hinzufuegen und daher auch neuen ClientReceiver-Thread starten
 		ClientReceiver clientReceiver = (new ClientReceiver(c, this));
 		new Thread(clientReceiver).start();
 		clientThreads.put(c, clientReceiver);
@@ -43,10 +51,10 @@ public class ChatServer implements Server {
 	}
 	
 	/**
-	 * @throws IOException 
 	 * @see Server#removeClient(Client)
 	 */
 	public void removeClient(Client c) throws IOException {	
+		//ClientReceiver Thread beenden und von Listen entfernen
 		clientThreads.get(c).beenden();
 		clientThreads.remove(c);
 		clients.remove(c);
@@ -63,12 +71,14 @@ public class ChatServer implements Server {
 	}
 
 	/**
-	 * @throws IOException 
 	 * @see Server#beenden
 	 */
 	public void beenden() throws IOException {
+		//Clients benachrichtigen
 		this.updateClients("Der Server wurde beendet!");
 		beenden = true;
+		
+		//Alle Clients abmelden
 		int size = clients.size();
 		for (int i=size-1; i>=0; i--) {
 			removeClient(clients.get(i));

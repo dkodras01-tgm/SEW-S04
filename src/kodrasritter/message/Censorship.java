@@ -18,8 +18,8 @@ public class Censorship extends Modifier {
 	/**
 	 * Im Konstruktor wird der super-Konstrukter aufgerufen
 	 * 
-	 * @param m
-	 * @throws IOException
+	 * @param m Message
+	 * @throws IOException Fehler bei der Netzwerkkommunikation
 	 */
 	public Censorship(Message m) throws IOException {
 		super(m);
@@ -37,12 +37,12 @@ public class Censorship extends Modifier {
 	/**
 	 * Woerter in der Nachricht werden Zensiert
 	 * 
-	 * @param content
+	 * @param content Inhalt einer Nachricht, die zensiert werden soll
 	 * @return zensierte Nachricht
 	 */
 	public String censor(String content) {
 
-		List<String> temp = Arrays.asList(content.toLowerCase().split(" "));
+		List<String> temp = Arrays.asList(content.split(" "));
 
 		for (int i = 0; i < temp.size(); i++) {
 			for (int k = 0; k < badwords.length; k++) {

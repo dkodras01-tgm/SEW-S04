@@ -12,7 +12,7 @@ public abstract class Modifier extends Message {
 	/**
 	 * Konstruktor setzt Message
 	 * 
-	 * @param m
+	 * @param m Zu setzende Message
 	 */
 	public Modifier(Message m) {
 		this.setMessage(m);
@@ -31,7 +31,7 @@ public abstract class Modifier extends Message {
 	/**
 	 * Setzt die Message
 	 * 
-	 * @param m
+	 * @param m Zu setzende Message
 	 */
 	public void setMessage(Message m) {
 		this.m = m;

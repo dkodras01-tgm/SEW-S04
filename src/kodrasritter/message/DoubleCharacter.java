@@ -12,7 +12,7 @@ public class DoubleCharacter extends Modifier {
 	/**
 	 * Konstruktor ruft den super-Konstruktor von Modifier
 	 * 
-	 * @param m
+	 * @param m Message
 	 */
 	public DoubleCharacter(Message m) {
 		super(m);
@@ -21,7 +21,7 @@ public class DoubleCharacter extends Modifier {
 	/**
 	 * Verdopplung wird ausgefuehrt
 	 * 
-	 * @return 
+	 * @return Inhalt einer veraenderten Nachricht
 	 */
 	public String process() {
 		return doubleCharacters(getMessage().process());
@@ -30,7 +30,7 @@ public class DoubleCharacter extends Modifier {
 	/**
 	 * Alle Buchstaben werden verdoppelt
 	 * 
-	 * @param content
+	 * @param content Inhalt einer Nachricht
 	 * @return verdoppelter Text
 	 */
 	public String doubleCharacters(String content) {

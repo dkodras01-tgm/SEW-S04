@@ -18,9 +18,10 @@ public interface NetworkControllable {
 	 * Diese Methode empfaengt neue Nachrichten und updatet die Anzeige (Display),
 	 * wenn eine neue Nachricht empfangen wird.<br>
 	 * Voraussetzung ist eine bereits aufgebaute Verbindung mit {@link #initConnection(String, int)}.<br>
-	 * Diese Methode wird am Ende von {@link #initConnection(String, int)} aufgerufen
+	 * Diese Methode wird von einem Client aufgerufen.
 	 * 
 	 * @throws IOException Fehler waehrend der Kommunikation
+	 * @param content Inhalt der Empfangenen Nachricht
 	 */
 	public void receive(String content) throws IOException;
 	

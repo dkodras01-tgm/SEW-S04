@@ -7,12 +7,21 @@ import java.awt.event.WindowListener;
 
 import kodrasritter.Controller;
 
-
+/**
+ * Diese Klasse implementiert einen {@link ActionListener} und einen {@link WindowListener}
+ * 
+ * @author Dominik Kodras
+ * @version 1.0
+ */
 public class ChatActionListener implements ActionListener, WindowListener {
 	
-	/** GUI-Controller */
 	private Controller control;
 	
+	/**
+	 * Controller, von dem aus die weitere Verarbeitung nach Ausloesung eines Events stattfindet.
+	 * 
+	 * @param control Controller
+	 */
 	public ChatActionListener(Controller control) {
 		this.control = control;
 	}

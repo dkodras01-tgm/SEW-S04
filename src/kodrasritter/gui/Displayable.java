@@ -5,7 +5,8 @@ import java.util.List;
 /**
  * Dieses Interface gibt Methoden zur Verbindung zwischen Chat-Anzeige und Verarbeitung vor.
  * 
- * @author Mathias Ritter 4AHIT
+ * @author Dominik Kodras
+ * @author Mathias Ritter
  * @version 1.0
  */
 public interface Displayable {
