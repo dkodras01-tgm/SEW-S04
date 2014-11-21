@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * Der ChatServer empfanegt Nachrichten der Clients und sendet diese an alle weiter.
@@ -51,6 +49,7 @@ public class ChatServer implements Server {
 	public void removeClient(Client c) throws IOException {	
 		clientThreads.get(c).beenden();
 		clientThreads.remove(c);
+		clients.remove(c);
 	}
 	
 	/**
@@ -71,10 +70,10 @@ public class ChatServer implements Server {
 		this.updateClients("Der Server wurde beendet!");
 		beenden = true;
 		int size = clients.size();
-		for (int i=0; i<size; i++) {
+		for (int i=size-1; i>=0; i--) {
 			removeClient(clients.get(i));
+			size = clients.size();
 		}
-		clients.removeAll(clients);
 			
 			
 	}

@@ -32,7 +32,12 @@ public class ClientReceiver implements Runnable {
 					s.updateClients(inputLine);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				try {
+					s.removeClient(c);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 		

@@ -1,7 +1,6 @@
 package kodrasritter.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
@@ -20,8 +19,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
-
-import kodrasritter.Controller;
 
 @SuppressWarnings("serial")
 public class ChatWindow extends JFrame implements Displayable {

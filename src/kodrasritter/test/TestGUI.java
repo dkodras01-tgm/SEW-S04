@@ -1,22 +1,17 @@
 package kodrasritter.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import kodrasritter.Controller;
-import kodrasritter.gui.ChatActionListener;
 import kodrasritter.gui.ChatWindow;
-import kodrasritter.gui.Displayable;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestGUI {
 	
-	private ActionListener al;
 	private ChatWindow display;
 	private Controller c;
 	
@@ -29,7 +24,6 @@ public class TestGUI {
 	@Before
 	public void init() throws IOException {
 		this.c = new Controller("127.0.0.1", 5643);
-		this.al = c.getAl();
 		this.display = (ChatWindow) c.getDisplay();
 		this.display.setVisible(false);
 	}

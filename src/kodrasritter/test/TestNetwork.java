@@ -1,16 +1,12 @@
 package kodrasritter.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.net.SocketException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import kodrasritter.connection.NetworkController;
 import kodrasritter.gui.ChatActionListener;
 import kodrasritter.gui.ChatWindow;
-import kodrasritter.gui.Displayable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +35,6 @@ public class TestNetwork {
 	@Test
 	public void testNetworkInit1() throws IOException {
 		nc.initConnection("127.0.0.1", 5627);
-//		assertEquals("239.34.12.5", nc.getGroup().getHostAddress());
 		nc.closeConnection();
 	}
 	
